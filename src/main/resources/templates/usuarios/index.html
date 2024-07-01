@@ -19,7 +19,7 @@
                     <th>ID</th>
                     <th>NOMBRE</th>
                     <th>USUARIO</th>
-                    <th>PASSWORD</th>
+                    <th>EMAIL</th>
                     <th>ACTION</th>
                 </tr>
             </thead>
@@ -28,7 +28,7 @@
                     <td th:text="${usuario.id_usuario}"></td>
                     <td th:text="${usuario.nombre}"></td>
                     <td th:text="${usuario.nombre_usuario}"></td>
-                    <td th:text="${usuario.password}"></td>
+                    <td th:text="${usuario.email}"></td>
                     <td>
                         <a class="btn btn-primary btn-sm" th:href="@{/usuarios/edit(id=${usuario.id_usuario})}">Edit</a>
                         <a class="btn btn-danger btn-sm"

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,6 +26,9 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository repo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @GetMapping({"","/"})
     public String listar(Model model){
         List<Usuario>usuarios = repo.findAll();
@@ -44,10 +48,15 @@ public class UsuarioController {
         @Valid @ModelAttribute UsuarioDto usuarioDto,
         BindingResult result){
             
+              
         Usuario usuario = new Usuario();
+        String encodedPassword = passwordEncoder.encode(usuarioDto.getPassword());
+
+
         usuario.setNombre(usuarioDto.getNombre()); 
+        usuario.setEmail(usuarioDto.getEmail());
         usuario.setNombre_usuario(usuarioDto.getNombre_usuario()); 
-        usuario.setPassword(usuarioDto.getPassword()); 
+        usuario.setPassword(encodedPassword); 
         
         repo.save(usuario);
         
@@ -63,6 +72,7 @@ public class UsuarioController {
 
             UsuarioDto usuarioDto = new UsuarioDto();
             usuarioDto.setNombre(usuario.getNombre());
+            usuarioDto.setEmail(usuario.getEmail());
             usuarioDto.setNombre_usuario(usuario.getNombre_usuario());
             usuarioDto.setPassword(usuario.getPassword());
 
@@ -88,6 +98,7 @@ public class UsuarioController {
             }
             usuario.setNombre(usuarioDto.getNombre());
             usuario.setNombre_usuario(usuarioDto.getNombre_usuario());
+            usuario.setEmail(usuarioDto.getEmail());
             usuario.setPassword(usuarioDto.getPassword());
     
             repo.save(usuario);

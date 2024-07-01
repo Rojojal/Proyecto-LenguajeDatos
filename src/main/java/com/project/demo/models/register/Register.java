@@ -1,12 +1,11 @@
-package com.project.demo.models.usuarios;
-
+package com.project.demo.models.register;
 
 import jakarta.persistence.*;
 
 
 @Entity
 @Table(name = "USUARIOS")
-public class Usuario {
+public class Register {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_seq_gen")
@@ -14,38 +13,28 @@ public class Usuario {
     @Column(name = "id_usuario")
     private int id_usuario;
 
-
-    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "nombre_usuario")
-    private String nombre_usuario;
-
-    @Column(name = "email")
-    private String email;
-
-
-    @Column(name = "password")
-    private String password;
-
-    
     private String role;
 
     public String getRole() {
         return this.role;
     }
 
-    public void setRoles(String role) {
+    public void setRole(String role) {
         this.role = role;
     }
-
-    public String getEmail() {
-        return this.email;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    private String email;
+
+    @Column(name = "nombre_usuario")
+    private String nombreUsuario;
+
+
+    private String password;
 
     public int getId_usuario() {
         return this.id_usuario;
@@ -63,12 +52,19 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getNombre_usuario() {
-        return this.nombre_usuario;
+    public String getNombreUsuario() {
+        return this.nombreUsuario;
     }
 
-    public void setNombre_usuario(String nombre_usuario) {
-        this.nombre_usuario = nombre_usuario;
+    public void setnombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -78,4 +74,5 @@ public class Usuario {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

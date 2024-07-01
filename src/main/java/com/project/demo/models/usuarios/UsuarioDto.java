@@ -10,8 +10,21 @@ public class UsuarioDto {
     @NotEmpty(message = "The username is required")
     private String nombre_usuario;
 
+    @NotEmpty(message = "The email is required")
+    private String email;
+
     @NotEmpty(message = "The password is required")
     private String password;
+
+    private String roles;
+
+    public String getRoles() {
+        return this.roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
 
     public String getNombre() {
         return this.nombre;
@@ -19,6 +32,14 @@ public class UsuarioDto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getNombre_usuario() {
