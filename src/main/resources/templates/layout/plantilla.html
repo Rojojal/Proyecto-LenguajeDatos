@@ -22,7 +22,6 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -38,12 +37,18 @@
                             </ul>
                         </li>
                     </ul>
-                    <ul class="navbar-nav me-2 d-flex">
+                    <!-- Mostrar el formulario de logout solo si el usuario está autenticado -->
+                    <form action="/logout" method="post" sec:authorize="isAuthenticated()">
+                        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                    </form>
+                    <!-- Mostrar los enlaces de registro e inicio de sesión solo si el usuario no está autenticado -->
+                    <ul class="navbar-nav me-2 d-flex" sec:authorize="!isAuthenticated()">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" th:href="@{/register}">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" th:href="@{/signin}">Login</a>
+                            <a class="nav-link active" aria-current="page" th:href="@{/login}">Login</a>
                         </li>
                     </ul>
                 </div>
