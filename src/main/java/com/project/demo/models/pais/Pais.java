@@ -1,0 +1,19 @@
+package com.project.demo.models.pais;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "FIDE_pais_TB")
+public class Pais {
+    @Column(name = "id_pais")
+    private double idPais;
+
+    @Column(name = "nombre_pais")
+    private String nombrePais;
+
+}
+/*
+id_pais number(6,0),
+    nombre_pais varchar2(60),
+ */
