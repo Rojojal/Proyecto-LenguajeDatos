@@ -1,12 +1,14 @@
 package com.project.demo.models.destino;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.util.Date;
 
 @Entity
 @Table(name = "FIDE_destino_TB")
 public class Destino {
+    @Id
     @Column(name = "id_Destino")
     private double idDestino;
 

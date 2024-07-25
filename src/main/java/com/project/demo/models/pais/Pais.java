@@ -1,11 +1,13 @@
 package com.project.demo.models.pais;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "FIDE_pais_TB")
 public class Pais {
+    @Id
     @Column(name = "id_pais")
     private double idPais;
 

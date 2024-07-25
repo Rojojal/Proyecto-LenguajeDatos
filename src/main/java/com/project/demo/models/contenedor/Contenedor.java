@@ -2,11 +2,13 @@ package com.project.demo.models.contenedor;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "FIDE_contenedor_TB")
 public class Contenedor {
+    @Id
     @Column(name = "id_contenedor")
     private double idContenedor;
 

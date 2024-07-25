@@ -2,6 +2,7 @@ package com.project.demo.models.capitan;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.Date;
 @Entity
 @Table(name = "FIDE_capitan_TB")
 public class Capitan {
+    @Id
     @Column(name = "id_capitan")
     private double idCapitan;
 

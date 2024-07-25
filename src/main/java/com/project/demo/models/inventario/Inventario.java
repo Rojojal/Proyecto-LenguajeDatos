@@ -1,11 +1,13 @@
 package com.project.demo.models.inventario;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "FIDE_inventario_TB")
 public class Inventario {
+    @Id
     @Column(name = "id_inventario")
     private double idInventario;
 
