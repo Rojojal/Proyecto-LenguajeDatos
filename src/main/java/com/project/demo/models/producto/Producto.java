@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "FIDE_producto_TB")
 public class Producto {
+    @Id
     @Column(name = "id_producto")
     private double idProducto;
 

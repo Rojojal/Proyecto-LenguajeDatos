@@ -2,11 +2,13 @@ package com.project.demo.models.categoria;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "FIDE_categoria_TB")
 public class Categoria {
+    @Id
     @Column(name = "id_categoria")
     private double idCategoria;
 

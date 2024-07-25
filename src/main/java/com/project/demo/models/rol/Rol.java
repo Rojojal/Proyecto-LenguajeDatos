@@ -2,11 +2,13 @@ package com.project.demo.models.rol;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "FIDE_rol_TB")
 public class Rol {
+    @Id
     @Column(name = "id_rol")
     private double idRol;
 

@@ -1,11 +1,13 @@
 package com.project.demo.models.almacen;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "FIDE_almacen_TB")
 public class Almacen {
+    @Id
     @Column(name = "id_almacen")
     private double idAlmacen;
 
