@@ -1,7 +1,7 @@
 package com.project.demo.services.firebaseImpl;
 
 import com.project.demo.services.firebaseService;
-/*
+
 import com.google.auth.Credentials;
 import com.google.auth.ServiceAccountSigner;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -13,7 +13,7 @@ import com.google.cloud.storage.StorageOptions;
 
 
 
- */
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,22 +36,22 @@ public class firebaseServiceImpl implements firebaseService {
 
             File file = this.convertToFile(archivoLocalCliente);
 
-          /*
+
             String URL = this.uploadFile(file, carpeta, fileName);
 
 
-           */
+
 
             file.delete();
 
-            //return URL;
-            return "";
+            return URL;
+
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
-/*
+
     private String uploadFile(File file, String carpeta, String fileName) throws IOException {
 
         ClassPathResource json = new ClassPathResource(rutaJsonFile + File.separator + archivoJsonFile);
@@ -66,7 +66,7 @@ public class firebaseServiceImpl implements firebaseService {
     }
 
 
- */
+
 
     private File convertToFile(MultipartFile archivoLocalCliente) throws IOException {
         File tempFile = File.createTempFile("img", null);
