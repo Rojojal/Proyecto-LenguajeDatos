@@ -47,7 +47,7 @@ ul{
 
 .linkHeader{
     color: #fff;
-    padding: 0.5rem;
+    padding: 1rem;
     position: relative;
 }
 
@@ -73,7 +73,8 @@ ul{
 
 .logoHeader{
     transition: 0.35s ease;
-    width: 50%;
+    width: 60%;
+    padding: 8px;
 
 
 }

@@ -18,7 +18,7 @@
                     <header th:fragment="header" class="header">
                         <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
                             <div class="container">
-                                <img class="logoHeader" src="   " alt="" style="width: 50px; height: auto;">
+                                <img class="logoHeader" src="https://static.vecteezy.com/system/resources/previews/019/806/719/non_2x/anchor-graphic-clipart-design-free-png.png" alt="" style="width: 60px; height: auto;">
                                     <a th:href="@{/}" class="navbar-brand ">[[#{aplicacion.titulo}]]</a>
                                     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                                         <span class="navbar-toggler-icon"></span>
@@ -48,8 +48,8 @@
                                             <ul class="dropdown-menu dropdown-menu-dark">
                                                 <ul class="navbar-nav columnaPerfil" sec:authorize="!isAuthenticated()">
 
-                                                    <li><a class="dropdown-item" th:href="@{/login}">Login</a></li>
-                                                    <li><a class="dropdown-item" th:href="@{/registro/nuevo}">Register</a></li>
+                                                    <li><a class="dropdown-item" th:href="@{/login}">[[#{login.login}]]</a></li>
+                                                    <li><a class="dropdown-item" th:href="@{/registro/nuevo}">[[#{accion.registrar}]]</a></li>
 
 
                                                 </ul>
