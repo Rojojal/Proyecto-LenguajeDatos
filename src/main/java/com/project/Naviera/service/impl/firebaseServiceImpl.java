@@ -1,6 +1,6 @@
-package com.project.demo.services.firebaseImpl;
+package com.project.Naviera.service.impl;
 
-import com.project.demo.services.firebaseService;
+import com.project.Naviera.service.firebaseService;
 
 import com.google.auth.Credentials;
 import com.google.auth.ServiceAccountSigner;

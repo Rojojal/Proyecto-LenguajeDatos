@@ -1,4 +1,4 @@
-package com.project.demo.services;
+package com.project.Naviera.service;
 import org.springframework.web.multipart.MultipartFile;
 public interface firebaseService {
     public String cargaImagen(MultipartFile archivoLocalCliente, String carpeta, Long id);
