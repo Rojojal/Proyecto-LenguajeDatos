@@ -1,5 +1,6 @@
 package com.project.Naviera.service;
 import org.springframework.web.multipart.MultipartFile;
+//se omitio un commit
 public interface firebaseService {
     public String cargaImagen(MultipartFile archivoLocalCliente, String carpeta, Long id);
 
