@@ -16,5 +16,17 @@ public class IndexController {
         model.addAttribute("attribute", "value");
         return "index";
     }
+    
+     @RequestMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("attribute", "value");
+        return "/login";
+    }
+    
+    @RequestMapping("/register")
+    public String registro(Model model) {
+        model.addAttribute("attribute", "value");
+        return "/register";
+    }
 }
 
