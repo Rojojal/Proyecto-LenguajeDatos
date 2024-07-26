@@ -1,8 +1,6 @@
 package com.project.Naviera.models;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.Date;
 
 @Entity
@@ -24,12 +22,21 @@ public class Destino {
     @Column(name = "ubicacion")
     private String  ubicacion;
 
-    @Column(name = "id_pais")
-    private double  idPais;
+//    @Column(name = "id_pais")
+//    private double  idPais;
+//
+//    @Column(name = "id_buque")
+//    private double  idBuque;
 
-    @Column(name = "id_buque")
-    private double  idBuque;
+    //join pais con destino
+    @OneToOne
+    @JoinColumn(name="id_pais")
+    private Pais pais;
 
+    //join buque con destino
+    @OneToOne
+    @JoinColumn(name="id_buque")
+    private Buque buque;
 }
 /*
 id_destino number(6,0),

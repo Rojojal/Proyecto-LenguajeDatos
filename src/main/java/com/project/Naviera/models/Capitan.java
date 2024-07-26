@@ -1,9 +1,6 @@
 package com.project.Naviera.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -13,9 +10,6 @@ public class Capitan {
     @Id
     @Column(name = "id_capitan")
     private double idCapitan;
-
-    @Column(name = "nombre_barco")
-    private String nombreBarco;
 
     @Column(name = "edad_capitan")
     private double edadCapitan;
@@ -29,9 +23,13 @@ public class Capitan {
     @Column(name = "fecha_inicio_cargo")
     private Date fechaInicioCargo;
 
-    @Column(name = "id_pais")
-    private double idPais;
+//    @Column(name = "id_pais")
+//    private double idPais;
 
+    //join pais con destino
+    @OneToOne
+    @JoinColumn(name="id_pais")
+    private Pais pais;
 }
 /*
     id_capitan number(6,0),

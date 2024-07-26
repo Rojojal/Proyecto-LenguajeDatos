@@ -1,6 +1,7 @@
 package com.project.Naviera.models;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -10,8 +11,8 @@ public class Producto {
     @Column(name = "id_producto")
     private double idProducto;
 
-    @Column(name = "id_categoria")
-    private double idCategoria;
+//    @Column(name = "id_categoria")
+//    private double idCategoria;
 
     @Column(name = "descripcion")
     private String descripcion;
@@ -19,11 +20,27 @@ public class Producto {
     @Column(name = "precio")
     private double precio;
 
-    @Column(name = "id_detalle")
-    private double idDetalle;
+//    @Column(name = "id_detalle")
+//    private double idDetalle;
 
     @Column(name = "ruta_imagen")
     private String rutaImagen;
+
+    //Join tabla categoria con producto
+    @ManyToOne
+    @JoinColumn(name="id_categoria")
+    private Categoria categoria;
+
+    //Join tabla detalle con producto
+    @OneToOne
+    @JoinColumn(name="id_detalle")
+    private Detalle detalle;
+
+
+    //Join tabla inventario con productos
+    @OneToMany
+    @JoinColumn(name="id_producto", updatable = false)
+    private List<Inventario> inventarios;
 
 }
 /*

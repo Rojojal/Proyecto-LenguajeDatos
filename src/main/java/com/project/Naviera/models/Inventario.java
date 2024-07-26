@@ -1,8 +1,5 @@
 package com.project.Naviera.models;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "FIDE_inventario_TB")
@@ -17,8 +14,13 @@ public class Inventario {
     @Column(name = "cantidad")
     private int cantidad;
 
-    @Column(name = "id_producto")
-    private double idProducto;
+//    @Column(name = "id_producto")
+//    private double idProducto;
+
+    //Join tabla producto con inventario
+    @ManyToOne
+    @JoinColumn(name="id_producto")
+    private Producto producto;
 }
 /*
 id_inventario number(6,0),

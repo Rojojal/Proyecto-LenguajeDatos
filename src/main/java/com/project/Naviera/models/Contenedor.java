@@ -1,9 +1,6 @@
 package com.project.Naviera.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "FIDE_contenedor_TB")
@@ -24,11 +21,21 @@ public class Contenedor {
     @Column(name = "valor_neto")
     private double valorNeto;
 
-    @Column(name = "id_almacen")
-    private double idAlmacen;
+//    @Column(name = "id_almacen")
+//    private double idAlmacen;
+//
+//    @Column(name = "id_buque")
+//    private double idBuque;
 
-    @Column(name = "id_buque")
-    private double idBuque;
+    //Join contenedor con almacen
+    @OneToOne
+    @JoinColumn(name="id_almacen")
+    private Almacen almacen;
+
+    //join buque con contenedor
+    @ManyToOne
+    @JoinColumn(name="id_buque")
+    private Buque buque;
 }
 /*
 id_contenedor number(6,0),

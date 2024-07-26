@@ -1,9 +1,8 @@
 package com.project.Naviera.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "FIDE_buque_TB")
@@ -18,13 +17,21 @@ public class Buque {
     @Column(name = "capacidad_maxima")
     private double capacidadMaxima;
 
-    @Column(name = "id_empleado")
-    private double idEmpleado;
+//    @Column(name = "id_empleado")
+//    private double idEmpleado;
+//
+//    @Column(name = "id_capitan")
+//    private double idCapitan;
 
-    @Column(name = "id_capitan")
-    private double idCapitan;
+    //join empleado con buque
+    @OneToMany
+    @JoinColumn(name="id_empleado", updatable = false)
+    private List<Empleado> empleados;
 
-
+    //join capian con buque
+    @OneToOne
+    @JoinColumn(name="id_capitan")
+    private Capitan capitan;
 
 }
 /*
