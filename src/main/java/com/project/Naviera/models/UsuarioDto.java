@@ -1,60 +1,106 @@
-//package com.project.Naviera.models;
-//
-//import jakarta.validation.constraints.*;
-//
-//public class UsuarioDto {
-//
-//    @NotEmpty(message = "The name is required")
-//    private String nombre;
-//
-//    @NotEmpty(message = "The username is required")
-//    private String nombre_usuario;
-//
-//    @NotEmpty(message = "The email is required")
-//    private String email;
-//
-//    @NotEmpty(message = "The password is required")
-//    private String password;
-//
-//    private String roles;
-//
-//    public String getRoles() {
-//        return this.roles;
-//    }
-//
-//    public void setRoles(String roles) {
-//        this.roles = roles;
-//    }
-//
-//    public String getNombre() {
-//        return this.nombre;
-//    }
-//
-//    public void setNombre(String nombre) {
-//        this.nombre = nombre;
-//    }
-//
-//    public String getEmail() {
-//        return this.email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
-//
-//    public String getNombre_usuario() {
-//        return this.nombre_usuario;
-//    }
-//
-//    public void setNombre_usuario(String nombre_usuario) {
-//        this.nombre_usuario = nombre_usuario;
-//    }
-//
-//    public String getPassword() {
-//        return this.password;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-//}
+package com.project.Naviera.models;
+
+
+import jakarta.persistence.*;
+
+
+@Entity
+@Table(name = "FIDE_rol_TB")
+public class UsuarioDto {
+
+ 
+
+
+
+   
+    private String primerNombre;
+
+   
+    private String apellido;
+
+    
+    private String username;
+
+
+   
+    private String contraseña;
+
+   
+    private String email;
+
+
+    
+    private String nacionalidad;
+
+   
+    private String rutaImagen;
+
+    //join de la tabla rol al id rol
+
+    private Rol rol;
+
+    public String getPrimerNombre() {
+        return this.primerNombre;
+    }
+
+    public void setPrimerNombre(String primerNombre) {
+        this.primerNombre = primerNombre;
+    }
+
+    public String getApellido() {
+        return this.apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getContraseña() {
+        return this.contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNacionalidad() {
+        return this.nacionalidad;
+    }
+
+    public void setNacionalidad(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
+    }
+
+    public String getRutaImagen() {
+        return this.rutaImagen;
+    }
+
+    public void setRutaImagen(String rutaImagen) {
+        this.rutaImagen = rutaImagen;
+    }
+
+    public Rol getRol() {
+        return this.rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+}

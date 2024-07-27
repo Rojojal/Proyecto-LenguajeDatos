@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -51,30 +52,27 @@ public class SecurityConfig implements WebMvcConfigurer {
         return messageSource;
     }
 
-    @Bean
+     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // Permisos generales apenas entrar a la pagina
-                .authorizeHttpRequests((request) -> request
-                .requestMatchers("/", "/index", "/errores/**",
+            .authorizeHttpRequests((requests) -> requests
+                .requestMatchers("/", "/index", "/errores/**", "/usuarios/**", 
                         "/sobreNosotros/**", "/visita/**", "/comentarios/**", "/contacto/**", "/ubicacion/**",
-                        "/register/**", "/js/**", "/webjars/**", "/error**", "/css/**", "/adoptar/**", "/solicitudesAdopcion/guardar", "/enviarCorreo/**")
-                .permitAll()
-                .requestMatchers(
-                        "Los permisos q tiene un admin"
-                ).hasRole("ADMIN")
-                .requestMatchers(
-                        "Los permisos q tiene el admin y el personal"
-                ).hasAnyRole("ADMIN", "PERSONAL")
-                .requestMatchers("Los permisos de usuarios")
-                .hasRole("USER")
-                )
-                .formLogin((form) -> form
+                        "/register/**", "/js/**", "/webjars/**", "/error**", "/css/**", "/adoptar/**", 
+                        "/solicitudesAdopcion/guardar", "/enviarCorreo/**", "/create").permitAll()
+                .requestMatchers("Los permisos q tiene un admin").hasRole("ADMIN")
+                .requestMatchers("Los permisos q tiene el admin y el personal").hasAnyRole("ADMIN", "PERSONAL")
+                .requestMatchers("Los permisos de usuarios").hasRole("USER")
+            )
+            .csrf(csrf -> csrf
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+            .formLogin((form) -> form
                 .loginPage("/login").permitAll())
-                .logout((logout) -> logout.permitAll());
+            .logout((logout) -> logout.permitAll());
+        
         return http.build();
-
     }
+
 
     @Bean
     public UserDetailsService userDetailsService() {
