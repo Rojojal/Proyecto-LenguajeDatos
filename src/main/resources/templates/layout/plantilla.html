@@ -50,29 +50,11 @@
 
                                                     <li><a class="dropdown-item" th:href="@{/login}">[[#{login.login}]]</a></li>
                                                     <li><a class="dropdown-item" th:href="@{/register}">[[#{accion.registrar}]]</a></li>
-
+                                                    <li><a class="dropdown-item" th:href="@{/producto/listado}">[[#{index.acceso}]]</a></li>
 
                                                 </ul>
 
-
-                                                <ul class="navbar-nav columnaPerfil" sec:authorize="isAuthenticated()">
-                                                    <li class="dropdown-item">
-                                                        <img th:src="@{${session.usuarioImagen}}" alt="your image" height="40" class="rounded-circle"/>
-                                                        <span sec:authentication='name'>Santi</span>
-
-                                                    </li>
-                                                    <li><a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_PERSONAL')" th:href="@{/panel}">[[#{index.acceso}]]</a></li>
-                                                    <li class="dropdown-item">
-
-                                                        <form method="post" th:action="@{/logout}">
-                                                            <button class="btn btn-dark">
-                                                                <i class="dropdown-item">Logut</i>
-                                                            </button>
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                            </ul>
-
+   
 
                                         </li>
                                     </ul>
