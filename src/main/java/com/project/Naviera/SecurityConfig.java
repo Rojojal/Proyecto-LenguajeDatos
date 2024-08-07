@@ -56,12 +56,12 @@ public class SecurityConfig implements WebMvcConfigurer {
         http
                 // Permisos generales apenas entrar a la pagina
                 .authorizeHttpRequests((request) -> request
-                .requestMatchers("/", "/index", "/errores/**",
+                .requestMatchers("/**", "/index", "/errores/**",
                         "/sobreNosotros/**", "/visita/**", "/comentarios/**", "/contacto/**", "/ubicacion/**",
-                        "/register/**", "/js/**", "/webjars/**", "/error**", "/css/**", "/adoptar/**", "/solicitudesAdopcion/guardar", "/enviarCorreo/**")
+                        "/register/**", "/js/**", "/webjars/**", "/error**", "/css/**",  "/enviarCorreo/**", "/Administracion/AccesoAdmin/**", "/AccesoAdmin/**", "/producto/**", "/producto/listado")
                 .permitAll()
                 .requestMatchers(
-                        "Los permisos q tiene un admin"
+                        "/AccesoAdmin/**"
                 ).hasRole("ADMIN")
                 .requestMatchers(
                         "Los permisos q tiene el admin y el personal"
@@ -74,21 +74,6 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .logout((logout) -> logout.permitAll());
         return http.build();
 
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails client = org.springframework.security.core.userdetails.User.withUsername("clientUser")
-                .password(passwordEncoder().encode("clientPass"))
-                .roles("client")
-                .build();
-
-        UserDetails admin = org.springframework.security.core.userdetails.User.withUsername("adminUser")
-                .password(passwordEncoder().encode("adminPass"))
-                .roles("admin")
-                .build();
-
-        return new InMemoryUserDetailsManager(client, admin);
     }
 
     @Bean

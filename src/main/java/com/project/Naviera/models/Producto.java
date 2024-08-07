@@ -2,14 +2,16 @@ package com.project.Naviera.models;
 
 import jakarta.persistence.*;
 import java.util.List;
+import lombok.Data;
 
 
 @Entity
 @Table(name = "FIDE_producto_TB")
+@Data
 public class Producto {
     @Id
     @Column(name = "id_producto")
-    private double idProducto;
+    private Long idProducto;
 
 //    @Column(name = "id_categoria")
 //    private double idCategoria;
