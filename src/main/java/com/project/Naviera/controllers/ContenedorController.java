@@ -44,23 +44,29 @@ public class ContenedorController {
         usar aca los atributos de producto dentro de producto contenedor
      */
     @GetMapping("/verProductosContenedor")
-    public String verProductos(Model model) {
+    public String verProductosContenedor(Model model) {
         model.addAttribute("attribute", "value");
         return "/contenedor/verProductosContenedor";
     }
 
     @GetMapping("/verProductosContenedor/editar")
-    public String editarProducto(Model model) {
+    public String editarProductoContenedor(Model model) {
         model.addAttribute("attribute", "value");
         return "/contenedor/editarProductoContenedor";
     }
 
     @GetMapping("/verProductosContenedor/eliminar")
-    public String eliminarProducto(Model model) {
+    public String eliminarProductoContenedor(Model model) {
         model.addAttribute("attribute", "value");
         return "redirect:/contenedor/verProductosContenedor";
     }
-    
+
+
+    @GetMapping("/verProductosContenedor/agregar")
+    public String agregarProductoContenedor(Model model) {
+        model.addAttribute("attribute", "value");
+        return "/contenedor/agregarProductoContenedor";
+    }
 
 }
 

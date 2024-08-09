@@ -8,16 +8,16 @@
 <body>
     <header th:replace="~{layout/plantilla :: header}"/>
     <div class="container py-3">
-        <h1 class="text-center">Editar producto del contenedor</h1>
+        <h1 class="text-center">[[#{contenedorProducto.editarProductoContenedor}]]</h1>
         <div class="container d-flex justify-content-center align-items-center ">
 
             <form action="" method="POST" >
 
-                <label for="productoID">Producto</label>
+                <label for="productoID">[[#{contenedorProducto.producto}]]</label>
                 <input class="form-control" name="productoID" id="productoID" type="number" />
 
 
-                <button type="submit" class="py-2 btn btn-success">Subir cambios</button>
+                <button type="submit" class="py-2 btn btn-success">[[#{accion.actualizar}]]</button>
             </form>
         </div>
     </div>

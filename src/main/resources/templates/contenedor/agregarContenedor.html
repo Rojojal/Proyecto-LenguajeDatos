@@ -8,24 +8,24 @@
 <body>
     <header th:replace="~{layout/plantilla :: header}"/>
     <div class="container py-3">
-        <h1 class="text-center">crear contenedor</h1>
+        <h1 class="text-center">[[#{contenedor.agregarContenedor}]]</h1>
         <div class="container d-flex justify-content-center align-items-center ">
 
             <form action="" method="POST" >
 
-                <label for="pesoNeto">peso neto</label>
+                <label for="pesoNeto">[[#{contenedor.pesoNeto}]]</label>
                 <input class="form-control" name="pesoNeto" id="pesoNeto" type="number" />
 
-                <label for="pesoMaximo">peso maximo</label>
+                <label for="pesoMaximo">[[#{contenedor.pesoMaximo}]]</label>
                 <input class="form-control" name="pesoMaximo" id="pesoMaximo" type="number" />
 
-                <label for="almacenID">almacen</label>
+                <label for="almacenID">[[#{contenedor.almacen}]]</label>
                 <input class="form-control" name="almacenID" id="almacenID" type="number" />
 
-                <label for="buqueID">peso maximo</label>
+                <label for="buqueID">[[#{contenedor.buque}]]</label>
                 <input class="form-control" name="buqueID" id="buqueID" type="number" />
 
-               <button type="submit" class="btn btn-success">crear contenedor</button>
+               <button type="submit" class="btn btn-success">[[#{accion.agregar}]]</button>
             </form>
         </div>
     </div>
