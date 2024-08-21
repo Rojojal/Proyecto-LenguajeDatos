@@ -48,7 +48,11 @@
 
                     <div class="row mb-3">
                         <label class="col-sm-4 col-form-label">Rol</label>
-                        <input type="text" class="form-control" th:field="${usuarioDto.rol}">
+                        <select class="form-control" th:field="${usuarioDto.rol}">
+                            <option value="1">Admin</option>
+                            <option value="2">User</option>
+
+                        </select>
                         <p th:if="${#fields.hasErrors('rol')}" th:errorclass="text-danger" th:errors="${usuarioDto.rol}"></p>
                     </div>
 

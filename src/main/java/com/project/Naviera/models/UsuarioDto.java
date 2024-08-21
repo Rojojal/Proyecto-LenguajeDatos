@@ -1,43 +1,40 @@
 package com.project.Naviera.models;
 
-
 import jakarta.persistence.*;
 
-
-@Entity
-@Table(name = "FIDE_rol_TB")
+@Table(name = "FIDE_USUARIO_TB")
 public class UsuarioDto {
 
- 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idUsuario;  
 
-
-
-   
     private String primerNombre;
 
-   
     private String apellido;
 
-    
     private String username;
 
-
-   
     private String contraseña;
 
-   
     private String email;
 
-
-    
     private String nacionalidad;
 
-   
     private String rutaImagen;
 
-    //join de la tabla rol al id rol
-
+    @ManyToOne 
+    @JoinColumn(name = "id_rol")
     private Rol rol;
+
+    // Getters and Setters
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
     public String getPrimerNombre() {
         return this.primerNombre;
@@ -102,5 +99,4 @@ public class UsuarioDto {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
-
 }

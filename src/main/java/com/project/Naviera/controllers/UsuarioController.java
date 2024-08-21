@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.project.Naviera.models.Usuario;
 import com.project.Naviera.models.UsuarioDto;
+import com.project.Naviera.service.RolRepository;
 import com.project.Naviera.service.UsuarioRepository;
 import jakarta.validation.Valid;
 import org.springframework.ui.Model;
@@ -26,6 +27,10 @@ public class UsuarioController {
 
    @Autowired
    private UsuarioRepository repo;
+   
+   @Autowired
+   private RolRepository rolrepo;
+
 
    @Autowired
    private PasswordEncoder passwordEncoder;
@@ -68,7 +73,7 @@ public class UsuarioController {
        return "redirect:/usuarios";
    }
 
-   @GetMapping("/edit/{id}")
+@GetMapping("/edit/{id}")
 public String showEditForm(@PathVariable("id") int id, Model model) {
     // Obtén el usuario por ID
     Usuario usuario = repo.findById(id).orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con ID: " + id));
@@ -85,6 +90,7 @@ public String showEditForm(@PathVariable("id") int id, Model model) {
     
     // Agrega UsuarioDto al modelo
     model.addAttribute("usuarioDto", usuarioDto);
+    model.addAttribute("roles", rolrepo.findAll());
     model.addAttribute("id", id); // Agrega el ID al modelo para su uso en el formulario
     
     return "usuarios/edit"; // Retorna la vista para el formulario de edición
@@ -126,8 +132,8 @@ public String updateUsuario(
 }
 
 
-   @GetMapping("/delete")
-   public String deleteUsuario(@RequestParam int id){
+@GetMapping("/delete")
+public String deleteUsuario(@RequestParam int id){
 
        try {
            Optional<Usuario> usuario = repo.findById(id);
