@@ -55,39 +55,30 @@ public class SecurityConfig implements WebMvcConfigurer {
      @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/", "/index", "/errores/**", "/usuarios/**", 
+
+                // Permisos generales apenas entrar a la pagina
+                .authorizeHttpRequests((request) -> request
+                .requestMatchers("/**", "/index", "/errores/**",
                         "/sobreNosotros/**", "/visita/**", "/comentarios/**", "/contacto/**", "/ubicacion/**",
-                        "/register/**", "/js/**", "/webjars/**", "/error**", "/css/**", "/adoptar/**", 
-                        "/solicitudesAdopcion/guardar", "/enviarCorreo/**", "/create").permitAll()
-                .requestMatchers("Los permisos q tiene un admin").hasRole("ADMIN")
-                .requestMatchers("Los permisos q tiene el admin y el personal").hasAnyRole("ADMIN", "PERSONAL")
-                .requestMatchers("Los permisos de usuarios").hasRole("USER")
-            )
-            .csrf(csrf -> csrf
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
-            .formLogin((form) -> form
+                        "/register/**", "/js/**", "/webjars/**", "/error**", "/css/**",  "/enviarCorreo/**", "/Administracion/AccesoAdmin/**", "/AccesoAdmin/**", "/producto/**", "/producto/listado"
+                        ,"/productoContenedor/**")
+                .permitAll()
+                .requestMatchers(
+                        "/AccesoAdmin/**"
+                ).hasRole("ADMIN")
+                .requestMatchers(
+                        "Los permisos q tiene el admin y el personal"
+                ).hasAnyRole("ADMIN", "PERSONAL")
+                .requestMatchers("Los permisos de usuarios")
+                .hasRole("USER")
+                )
+                .formLogin((form) -> form
                 .loginPage("/login").permitAll())
             .logout((logout) -> logout.permitAll());
         
         return http.build();
     }
 
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails client = org.springframework.security.core.userdetails.User.withUsername("clientUser")
-                .password(passwordEncoder().encode("clientPass"))
-                .roles("client")
-                .build();
-
-        UserDetails admin = org.springframework.security.core.userdetails.User.withUsername("adminUser")
-                .password(passwordEncoder().encode("adminPass"))
-                .roles("admin")
-                .build();
-
-        return new InMemoryUserDetailsManager(client, admin);
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

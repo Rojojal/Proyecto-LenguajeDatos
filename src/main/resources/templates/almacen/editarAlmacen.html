@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+
+</head>
+<body>
+    <header th:replace="~{layout/plantilla :: header}"/>
+    <div class="container py-3">
+        <h1 class="text-center">[[#{contenedor.editarContenedor}]]</h1>
+        <div class="container d-flex justify-content-center align-items-center ">
+
+            <form action="" method="POST"
+                  th:action="@{/almacen/guardar}"
+                  th:object="${almacen}">
+                <input type="hidden" name="idAlmacen" th:field="*{idAlmacen}"/>
+
+                <label for="tipoAlmacen">[[#{almacen.tipoAlmacen}]]</label>
+                <input class="form-control" name="tipoAlmacen" th:field="*{tipoAlmacen}" id="tipoAlmacen" type="text" />
+
+
+                <label for="estado">[[#{almacen.estado}]]</label>
+                <input class="form-control" name="estado" th:field="*{estado}" id="estado" type="text" />
+
+
+               <button type="submit" class="btn btn-success">[[#{accion.actualizar}]]</button>
+            </form>
+        </div>
+    </div>
+    <footer th:replace="~{layout/plantilla :: footer}"></footer>
+</body>
+</html>
