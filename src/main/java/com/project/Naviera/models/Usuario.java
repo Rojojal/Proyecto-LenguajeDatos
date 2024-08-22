@@ -108,4 +108,5 @@ public class Usuario {
     public void setRol(Rol idrol) {
         this.idrol = idrol;
     }
+     //cambios
 }

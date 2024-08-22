@@ -38,4 +38,5 @@ public class Rol {
     public String toString() {
         return nombreRol;
     }
+     //cambios
 }

@@ -93,7 +93,7 @@ public class UsuarioDto {
     public void setRutaImagen(String rutaImagen) {
         this.rutaImagen = rutaImagen;
     }
-
+    //cambios
    // Additional getter and setter for role ID
    public Integer getRolId() {
     return idrol;

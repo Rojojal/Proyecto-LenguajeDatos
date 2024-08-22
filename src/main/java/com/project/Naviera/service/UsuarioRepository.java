@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.project.Naviera.models.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
-
+ //cambios
    
     public Usuario findByEmail(String email);
 }
