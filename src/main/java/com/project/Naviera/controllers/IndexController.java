@@ -28,5 +28,11 @@ public class IndexController {
         model.addAttribute("attribute", "value");
         return "/register";
     }
+    
+    @RequestMapping("/sobreNosotros")
+    public String Nosotros(Model model) {
+        model.addAttribute("attribute", "value");
+        return "/sobreNosotros/sobreNosotros";
+    }
 }
 

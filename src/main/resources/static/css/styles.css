@@ -102,3 +102,29 @@ ul{
     max-width: 100%;
     object-fit: cover;
 }
+
+
+
+.navbar-nav .dropdown-menu {
+    background-color: #343a40;
+    border: none;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    transform: translateY(-10px);
+    opacity: 0;
+    display: block;
+    visibility: hidden;
+}
+
+
+.navbar-nav .dropdown-menu.show {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.navbar-nav .dropdown-menu:not(.show) {
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
+}
