@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+
+        <section class="text-center my-5">
+            <h2>Sobre Nosotros</h2>
+            <p>Conoce más acerca de nuestra naviera y los servicios que ofrecemos</p>
+        </section>
+
+        <div class="container-sm">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <div class="card bg-dark text-white">
+                        <img src="https://img1.wsimg.com/isteam/stock/9neBgd/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1280" class="card-img" alt="Historia de la naviera">
+                            <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                                <h3 class="card-title text-center">Nuestra Historia</h3>
+                            </div>
+                    </div>
+                    <p class="mt-4">Desde nuestros inicios, hemos navegado los mares del mundo, brindando soluciones logísticas marítimas confiables. Nos especializamos en transporte de carga, operando con una flota moderna que garantiza la seguridad y puntualidad en cada trayecto.</p>
+                </div>
+            </div>
+
+            <div class="row text-center mb-5">
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow-sm" style="border-radius: 12px;">
+                        <div class="card-body">
+                            <h3 class="card-title"><i class="fas fa-anchor"></i> Nuestra Misión</h3>
+                            <p class="card-text">
+                                Proveer servicios de transporte marítimo de alta calidad, conectando puertos y destinos de manera eficiente, segura y sostenible. Nos esforzamos por ser el eslabón confiable en la cadena de suministro global, apoyando el crecimiento económico y el comercio internacional.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow-sm" style="border-radius: 12px;">
+                        <div class="card-body">
+                            <h3 class="card-title"><i class="fas fa-ship"></i> Nuestro Compromiso</h3>
+                            <p class="card-text">
+                                Estamos comprometidos con la innovación y la mejora continua. Implementamos tecnologías de vanguardia para optimizar rutas, reducir emisiones y mejorar la eficiencia operativa, asegurando que nuestras operaciones sean respetuosas con el medio ambiente.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow-sm" style="border-radius: 12px;">
+                        <div class="card-body">
+                            <h3 class="card-title"><i class="fas fa-globe"></i> Impacto Global</h3>
+                            <p class="card-text">
+                                Nuestra naviera desempeña un papel crucial en el comercio mundial, facilitando el intercambio de bienes y recursos entre continentes. Contribuimos al desarrollo económico global y proporcionamos soluciones logísticas que superan expectativas, garantizando la satisfacción de nuestros clientes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <div class="card text-white" style="background: linear-gradient(to right, #6a11cb, #2575fc); border-radius: 15px;">
+                        <div class="card-body">
+                            <h3 class="card-title">🌟 Nuestros Valores</h3>
+                            <p class="card-text" style="font-size: 1.1rem;">
+                                La integridad, el compromiso y la sostenibilidad son los pilares que guían nuestras operaciones diarias. Nos esforzamos por ser líderes en la industria, siempre actuando con responsabilidad social y ambiental.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="container-fluid" th:replace="~{layout/plantilla :: footer}"></footer>
+    </body>
+</html>

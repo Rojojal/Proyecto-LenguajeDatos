@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 public class Empleado {
     @Id
     @Column(name = "id_empleado")
-    private double idEmpleado;
+    private long idEmpleado;
 
     @Column(name = "nombre")
     private String nombre;
