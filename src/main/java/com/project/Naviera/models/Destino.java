@@ -8,7 +8,7 @@ import java.util.Date;
 public class Destino {
     @Id
     @Column(name = "id_Destino")
-    private double idDestino;
+    private long idDestino;
 
     @Column(name = "nombre_puerto")
     private double  nombrePuerto;

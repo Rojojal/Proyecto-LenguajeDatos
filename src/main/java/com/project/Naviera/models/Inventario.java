@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class Inventario {
     @Id
     @Column(name = "id_inventario")
-    private double idInventario;
+    private long idInventario;
 
     @Column(name = "ubicacion")
     private String ubicacion;

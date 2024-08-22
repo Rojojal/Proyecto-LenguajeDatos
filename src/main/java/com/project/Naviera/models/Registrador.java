@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "USUARIOS")
-public class Register {
+public class Registrar {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_seq_gen")
