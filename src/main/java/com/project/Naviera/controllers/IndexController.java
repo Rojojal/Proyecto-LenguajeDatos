@@ -30,9 +30,15 @@ public class IndexController {
     }
     
     @RequestMapping("/sobreNosotros")
-    public String Nosotros(Model model) {
+    public String sobreNosotros(Model model) {
         model.addAttribute("attribute", "value");
         return "/sobreNosotros/sobreNosotros";
+    }
+    
+    @RequestMapping("/contacto")
+    public String contacto(Model model) {
+        model.addAttribute("attribute", "value");
+        return "/contacto/contactoListado";
     }
 }
 
