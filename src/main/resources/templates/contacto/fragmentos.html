@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+
+        <section th:fragment="contendor" class="py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 text-center">
+                        <h1 class="display-4 font-weight-bold mb-4">[[#{contacto.titulo}]]</h1>
+                        <p class="lead">[[#{contacto.introduccion}]]</p>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-lg-6 mb-4">
+                        <div class="bg-dark text-white p-4 rounded shadow">
+                            <h3 class="font-weight-bold">[[#{contacto.horario}]]</h3>
+                            <p class="mb-2">[[#{contacto.horario1}]]</p>
+                            <p class="mb-4">[[#{contacto.horario1.2}]]</p>
+
+                            <h3 class="font-weight-bold">[[#{contacto.telefonoTitulo}]]</h3>
+                            <p class="mb-4"><i class="fas fa-phone-alt mr-2"></i>+506 2222 2222</p>
+
+                            <h3 class="font-weight-bold">[[#{contacto.correo}]]</h3>
+                            <p class="mb-4"><i class="fas fa-envelope mr-2"></i>contacto.intermesk@gmail.com</p>
+
+                            <h3 class="font-weight-bold">[[#{contacto.redes}]]</h3>
+                            <p class="mb-2">
+                                <i class="fab fa-instagram mr-2"></i>
+                                <a href="https://www.instagram.com/ufidelitas/?hl=en" target="_blank" class="text-white">Instagram</a>
+                            </p>
+                            <p>
+                                <i class="fab fa-facebook-square mr-2"></i>
+                                <a href="https://www.facebook.com/ufidelitas/?locale=es_LA" target="_blank" class="text-white">Facebook</a>
+                            </p>
+
+                            <p class="font-size-lg mt-4">[[#{contacto.ayuda}]]</p>
+                            <a href="#formulario" class="btn btn-primary btn-lg mt-3">[[#{contacto.formulario}]]</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <img class="rounded-corner w-100 shadow"
+                             src="https://cms.ar-racking.com/uploads/2022/03/suelos-2023.jpg"
+                             alt="gato" style="height: 500px; object-fit: cover;"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section th:fragment="formularioContacto" id="contacto" class="py-5 bg-light">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <h3 class="text-center font-weight-bold mb-5">[[#{texto.formulario}]]</h3>
+                        <form method="POST" th:action="@{/enviarCorreo/enviar}" class="needs-validation" novalidate>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="nombre" class="form-label">[[#{usuario.nombre}]]</label>
+                                    <input type="text" class="form-control custom-input" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                                        <div class="invalid-feedback">
+                                            [[#{contacto.nombre}]]
+                                        </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="apellidos" class="form-label">[[#{usuario.apellidos}]]</label>
+                                    <input type="text" class="form-control custom-input" id="apellidos" name="apellidos" placeholder="Tus apellidos" required>
+                                        <div class="invalid-feedback">
+                                            [[#{contacto.apellido}]]
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="correo" class="form-label">[[#{usuario.correo}]]</label>
+                                    <input type="email" class="form-control custom-input" id="correo" name="correo" placeholder="Tu correo electrónico" required>
+                                        <div class="invalid-feedback">
+                                            [[#{contacto.correo.formulario}]]
+                                        </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="telefono" class="form-label">[[#{usuario.telefono2}]]</label>
+                                    <input type="tel" class="form-control custom-input" id="telefono" name="telefono" placeholder="Tu número de teléfono" required>
+                                        <div class="invalid-feedback">
+                                            [[#{usuario.telefono2}]]
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col mb-3">
+                                    <label for="mensaje" class="form-label">[[#{usuario.mensaje}]]</label>
+                                    <textarea class="form-control custom-input" id="mensaje" name="mensaje" rows="5" placeholder="Tu mensaje" required></textarea>
+                                    <div class="invalid-feedback">
+                                        [[#{contacto.mensaje}]]
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-block btn-lg custom-button" type="submit">[[#{contacto.boton}]]</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="container-fluid" th:replace="~{layout/plantilla :: footer}"></footer>
+    </body>
+</html>

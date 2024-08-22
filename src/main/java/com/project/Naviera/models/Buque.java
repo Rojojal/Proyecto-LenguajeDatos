@@ -9,7 +9,7 @@ import java.util.List;
 public class Buque {
     @Id
     @Column(name = "id_buque")
-    private double idBuque;
+    private long idBuque;
 
     @Column(name = "nombre_barco")
     private String nombreBarco;

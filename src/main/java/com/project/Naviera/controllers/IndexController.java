@@ -28,5 +28,17 @@ public class IndexController {
         model.addAttribute("attribute", "value");
         return "/register";
     }
+    
+    @RequestMapping("/sobreNosotros")
+    public String sobreNosotros(Model model) {
+        model.addAttribute("attribute", "value");
+        return "/sobreNosotros/sobreNosotros";
+    }
+    
+    @RequestMapping("/contacto")
+    public String contacto(Model model) {
+        model.addAttribute("attribute", "value");
+        return "/contacto/contactoListado";
+    }
 }
 
