@@ -2,20 +2,40 @@ package com.project.Naviera.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "FIDE_rol_TB")
+@Table(name = "FIDE_ROL_TB")
 public class Rol {
     @Id
-    @Column(name = "id_rol")
-    private double idRol;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_ROL")
+    private Long idrol;
 
-    @Column(name = "nombre_rol")
+    @Column(name = "NOMBRE_ROL")
     private String nombreRol;
+
+    public Long getIdrol() {
+        return idrol;
+    }
+
+    public void setIdrol(Long idrol) {
+        this.idrol = idrol;
+    }
+
+    public String getNombreRol() {
+        return nombreRol;
+    }
+
+    public void setNombreRol(String nombreRol) {
+        this.nombreRol = nombreRol;
+    }
+
+    @Override
+    public String toString() {
+        return nombreRol;
+    }
 }
-/*
-  id_rol number(6,0),
-    nombre_rol varchar2(64),-- roles: usuario, administrador
- */

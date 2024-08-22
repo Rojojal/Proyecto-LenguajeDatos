@@ -2,13 +2,16 @@ package com.project.Naviera.models;
 
 import jakarta.persistence.*;
 
+@Entity
 @Table(name = "FIDE_USUARIO_TB")
 public class UsuarioDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idUsuario;  
+    @Column(name = "id_usuario")
+    private Long idUsuario;  
 
+    @Column(name = "primer_nombre")
     private String primerNombre;
 
     private String apellido;
@@ -21,18 +24,17 @@ public class UsuarioDto {
 
     private String nacionalidad;
 
+    @Column(name = "ruta_imagen")
     private String rutaImagen;
 
-    @ManyToOne 
-    @JoinColumn(name = "id_rol")
-    private Rol rol;
+    private Integer  idrol;
 
     // Getters and Setters
-    public Integer getIdUsuario() {
+    public Long getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
+    public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -92,11 +94,12 @@ public class UsuarioDto {
         this.rutaImagen = rutaImagen;
     }
 
-    public Rol getRol() {
-        return this.rol;
-    }
+   // Additional getter and setter for role ID
+   public Integer getRolId() {
+    return idrol;
+}
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
+public void setRolId(Integer idrol) {
+    this.idrol = idrol;
+}
 }

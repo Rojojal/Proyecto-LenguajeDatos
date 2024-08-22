@@ -12,10 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.project.Naviera.models.Rol;
 import com.project.Naviera.models.Usuario;
 import com.project.Naviera.models.UsuarioDto;
 import com.project.Naviera.service.RolRepository;
+import com.project.Naviera.service.RolService;
 import com.project.Naviera.service.UsuarioRepository;
+import com.project.Naviera.service.UsuarioService;
+
 import jakarta.validation.Valid;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,11 +30,17 @@ import org.springframework.validation.BindingResult;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
+    @Autowired
+    private UsuarioService userService;
+
    @Autowired
    private UsuarioRepository repo;
    
    @Autowired
-   private RolRepository rolrepo;
+   private RolRepository rolRepo;
+
+   @Autowired
+   private RolService rolService;
 
 
    @Autowired
@@ -43,35 +54,61 @@ public class UsuarioController {
    }  
    
    @GetMapping("/create")
-   public String create(Model model){
+   public String create(Model model) {
        UsuarioDto usuarioDto = new UsuarioDto();
+       
+       List<Rol> roles = rolService.getAllRoles();
+       System.out.println("Roles: " + roles);
        model.addAttribute("usuarioDto", usuarioDto);
+       model.addAttribute("roles", roles);
        return "usuarios/create";
    }
-
+   
    @PostMapping("/create")
-   public String CreateUsuario(
-       @Valid @ModelAttribute UsuarioDto usuarioDto,
-       BindingResult result){
-
-
+   public String createUsuario(
+           @Valid @ModelAttribute UsuarioDto usuarioDto,
+           BindingResult result,
+           Model model) {
+       if (result.hasErrors()) {
+           List<Rol> roles = rolService.getAllRoles();
+           model.addAttribute("roles", roles);
+           return "usuarios/create";
+       }
+   
        Usuario usuario = new Usuario();
        String encodedPassword = passwordEncoder.encode(usuarioDto.getContraseña());
-
-
+   
        usuario.setPrimerNombre(usuarioDto.getPrimerNombre());
        usuario.setApellido(usuarioDto.getApellido());
        usuario.setUsername(usuarioDto.getUsername());
        usuario.setContraseña(encodedPassword);
        usuario.setEmail(usuarioDto.getEmail());
-       usuario.setRol(usuarioDto.getRol());
+       Integer rolId = usuarioDto.getRolId();
+        Long rolIdLong = rolId.longValue(); // Convert Integer to Long
+        Rol rol = rolService.getAllRoles().stream()
+                .filter(r -> r.getIdrol().equals(rolIdLong))
+                .findFirst()
+                .orElse(null);
+
+       if (rol != null) {
+           usuario.setRol(rol);
+       } else {
+           result.rejectValue("rolId", "error.rolId", "Invalid Role ID");
+           List<Rol> roles = rolService.getAllRoles();
+           model.addAttribute("roles", roles);
+           return "usuarios/create";
+       }
        usuario.setNacionalidad(usuarioDto.getNacionalidad());
        usuario.setRutaImagen(usuarioDto.getRutaImagen());
-
+   
        repo.save(usuario);
-
+   
        return "redirect:/usuarios";
    }
+   
+
+
+
 
 @GetMapping("/edit/{id}")
 public String showEditForm(@PathVariable("id") int id, Model model) {
@@ -84,13 +121,17 @@ public String showEditForm(@PathVariable("id") int id, Model model) {
     usuarioDto.setApellido(usuario.getApellido());
     usuarioDto.setUsername(usuario.getUsername());
     usuarioDto.setEmail(usuario.getEmail());
-    usuarioDto.setRol(usuario.getRol());
+    if (usuario.getRol() != null) {
+        usuarioDto.setRolId(usuario.getRol().getIdrol().intValue()); // Ensure this is Long
+    }
+    
+    
     usuarioDto.setNacionalidad(usuario.getNacionalidad());
     usuarioDto.setRutaImagen(usuario.getRutaImagen());
     
     // Agrega UsuarioDto al modelo
     model.addAttribute("usuarioDto", usuarioDto);
-    model.addAttribute("roles", rolrepo.findAll());
+    model.addAttribute("roles", rolRepo.findAll());
     model.addAttribute("id", id); // Agrega el ID al modelo para su uso en el formulario
     
     return "usuarios/edit"; // Retorna la vista para el formulario de edición
@@ -116,7 +157,14 @@ public String updateUsuario(
     usuario.setApellido(usuarioDto.getApellido());
     usuario.setUsername(usuarioDto.getUsername());
     usuario.setEmail(usuarioDto.getEmail());
-    usuario.setRol(usuarioDto.getRol());
+    Rol rol = rolRepo.findById(usuarioDto.getRolId().longValue()).orElse(null);
+        if (rol != null) {
+            usuario.setRol(rol);
+        } else {
+            // Handle the case where Rol was not found (e.g., show an error message)
+            result.rejectValue("rolId", "error.rolId", "Invalid Role ID");
+            return "usuarios/edit";
+        }
     usuario.setNacionalidad(usuarioDto.getNacionalidad());
     usuario.setRutaImagen(usuarioDto.getRutaImagen());
     
