@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RolRepository extends JpaRepository<Rol, Long> {
-     //cambios
+     Rol findById(long id);
 }

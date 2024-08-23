@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+</head>
+<body>
+    <form  method="post" enctype="multipart/form-data" th:object="${usuarioDto}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+        <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">Nombre</label>
+            <input type="text" class="form-control" th:field="${usuarioDto.primerNombre}">
+            <p th:if="${#fields.hasErrors('primerNombre')}" th:errorclass="text-danger" th:errors="${usuarioDto.primerNombre}"></p>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">Apellido</label>
+            <input type="text" class="form-control" th:field="${usuarioDto.apellido}">
+            <p th:if="${#fields.hasErrors('apellido')}" th:errorclass="text-danger" th:errors="${usuarioDto.apellido}"></p>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">Username</label>
+            <input type="text" class="form-control" th:field="${usuarioDto.username}">
+            <p th:if="${#fields.hasErrors('username')}" th:errorclass="text-danger" th:errors="${usuarioDto.username}"></p>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">Password</label>
+            <input type="password" class="form-control" th:field="${usuarioDto.contraseña}">
+            <p th:if="${#fields.hasErrors('contraseña')}" th:errorclass="text-danger" th:errors="${usuarioDto.contraseña}"></p>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">Email</label>
+            <input type="email" class="form-control" th:field="${usuarioDto.email}">
+            <p th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="${usuarioDto.email}"></p>
+        </div>        
+        
+        <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">Nacionalidad</label>
+            <input type="text" class="form-control" th:field="${usuarioDto.nacionalidad}">
+            <p th:if="${#fields.hasErrors('nacionalidad')}" th:errorclass="text-danger" th:errors="${usuarioDto.nacionalidad}"></p>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">Imagen</label>
+            <input type="text" class="form-control" th:field="${usuarioDto.rutaImagen}">
+            <p th:if="${#fields.hasErrors('rutaImagen')}" th:errorclass="text-danger" th:errors="${usuarioDto.rutaImagen}"></p>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-sm-12 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div> 
+    </form>
+</body>
+</html>

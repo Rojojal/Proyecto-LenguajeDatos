@@ -2,6 +2,7 @@ package com.project.Naviera.service;
 
 import com.project.Naviera.service.UsuarioRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,20 @@ public class UsuarioService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loadUserByUsername'");
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        if (usuario == null) {
+            throw new UsernameNotFoundException("User not found with email: " + email);
+        }
+        return new org.springframework.security.core.userdetails.User(usuario.getEmail(), usuario.getContraseña(), new ArrayList<>());
     }
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+    
+    public Usuario findByEmail(String email) {
+        return usuarioRepository.findByEmail(email);
+    }
+
+    
    
 }

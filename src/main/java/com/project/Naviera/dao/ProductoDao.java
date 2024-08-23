@@ -17,6 +17,6 @@ public interface ProductoDao extends JpaRepository<Producto, Long> {
 
     
     
-     @Procedure(name = "Favorite_Property.addFavoriteProperty")
+    @Procedure(name = "Favorite_Property.addFavoriteProperty")
     public void addFavoriteProperty(@Param("p_id_property") Long p_id_property, @Param("p_id_user") Long p_id_user);
 }

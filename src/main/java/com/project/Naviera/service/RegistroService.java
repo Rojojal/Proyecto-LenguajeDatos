@@ -1,7 +1,11 @@
 package com.project.Naviera.service;
 
+import javax.mail.MessagingException;
+
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.project.Naviera.models.Usuario;
 
 public interface RegistroService {
 

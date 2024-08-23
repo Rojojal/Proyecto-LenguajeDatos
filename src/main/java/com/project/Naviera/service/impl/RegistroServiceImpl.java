@@ -7,7 +7,7 @@ package com.project.Naviera.service.impl;
 /**
  *
  * @author Extreme
- */
+ 
 
 package com.RefugioAnimal.service.impl;
 
@@ -197,3 +197,4 @@ public class RegistroServiceImpl implements RegistroService {
                 asunto, mensaje);
     }
 }
+*/

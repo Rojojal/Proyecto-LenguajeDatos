@@ -27,7 +27,7 @@ public class UsuarioDto {
     @Column(name = "ruta_imagen")
     private String rutaImagen;
 
-    private Integer  idrol;
+    private Long  idrol;
 
     // Getters and Setters
     public Long getIdUsuario() {
@@ -95,11 +95,11 @@ public class UsuarioDto {
     }
     //cambios
    // Additional getter and setter for role ID
-   public Integer getRolId() {
+   public Long getRolId() {
     return idrol;
 }
 
-public void setRolId(Integer idrol) {
+public void setRolId(Long idrol) {
     this.idrol = idrol;
 }
 }

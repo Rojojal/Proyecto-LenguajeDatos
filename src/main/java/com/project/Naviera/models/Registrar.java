@@ -1,5 +1,5 @@
 package com.project.Naviera.models;
-
+/* 
 import jakarta.persistence.*;
 
 
@@ -76,3 +76,4 @@ public class Registrar {
     }
 
 }
+*/
