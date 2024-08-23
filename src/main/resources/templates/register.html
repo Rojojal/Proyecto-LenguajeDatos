@@ -19,29 +19,54 @@
                                 <h4 class="card-title mt-3 text-center">Registro</h4>
                                 <p class="text-center">Por favor, ingrese los datos para continuar con el registro</p>
 
-                                <form method="POST" th:action="@{/signUp/createUser}" th:object="${users}" class="was-validated">
+                                <form method="POST" th:action="@{/register}" th:object="${usuarioDto}" class="was-validated">
 
-                                    <div class="form-group input-group mb-2">
-                                        <input name="name" class="form-control" placeholder="Nombre"  type="text" required="true"/>
+                                    <div class="row mb-3">
+                                        <label class="col-sm-4 col-form-label">Nombre</label>
+                                        <input type="text" class="form-control" th:field="${usuarioDto.primerNombre}">
+                                        <p th:if="${#fields.hasErrors('primerNombre')}" th:errorclass="text-danger" th:errors="${usuarioDto.primerNombre}"></p>
                                     </div>
-
-                                    <div class="form-group input-group mb-2">
-                                        <input name="first_sur_name" class="form-control" placeholder="Primer Apellido"   type="text" required="true"/>
+                            
+                                    <div class="row mb-3">
+                                        <label class="col-sm-4 col-form-label">Apellido</label>
+                                        <input type="text" class="form-control" th:field="${usuarioDto.apellido}">
+                                        <p th:if="${#fields.hasErrors('apellido')}" th:errorclass="text-danger" th:errors="${usuarioDto.apellido}"></p>
                                     </div>
-
-                                    <div class="form-group input-group mb-2">
-                                        <input name="second_sur_name" class="form-control" placeholder="Segundo Apellido"   type="text" required="true"/>
+                            
+                                    <div class="row mb-3">
+                                        <label class="col-sm-4 col-form-label">Username</label>
+                                        <input type="text" class="form-control" th:field="${usuarioDto.username}">
+                                        <p th:if="${#fields.hasErrors('username')}" th:errorclass="text-danger" th:errors="${usuarioDto.username}"></p>
                                     </div>
-
-                                    <div class="form-group input-group mb-2">
-                                     <!-- 1   <input name="email" class="form-control" placeholder="Email address" type="email" "  required="true"/>-->
+                            
+                                    <div class="row mb-3">
+                                        <label class="col-sm-4 col-form-label">Password</label>
+                                        <input type="password" class="form-control" th:field="${usuarioDto.contraseña}">
+                                        <p th:if="${#fields.hasErrors('contraseña')}" th:errorclass="text-danger" th:errors="${usuarioDto.contraseña}"></p>
                                     </div>
-
+                            
+                                    <div class="row mb-3">
+                                        <label class="col-sm-4 col-form-label">Email</label>
+                                        <input type="email" class="form-control" th:field="${usuarioDto.email}">
+                                        <p th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="${usuarioDto.email}"></p>
+                                    </div>        
+                                    
+                                    <div class="row mb-3">
+                                        <label class="col-sm-4 col-form-label">Nacionalidad</label>
+                                        <input type="text" class="form-control" th:field="${usuarioDto.nacionalidad}">
+                                        <p th:if="${#fields.hasErrors('nacionalidad')}" th:errorclass="text-danger" th:errors="${usuarioDto.nacionalidad}"></p>
+                                    </div>
+                            
+                                    <div class="row mb-3">
+                                        <label class="col-sm-4 col-form-label">Imagen</label>
+                                        <input type="text" class="form-control" th:field="${usuarioDto.rutaImagen}">
+                                        <p th:if="${#fields.hasErrors('rutaImagen')}" th:errorclass="text-danger" th:errors="${usuarioDto.rutaImagen}"></p>
+                                    </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-block mt-3">Sign Up</button>
                                     </div>
                                     <p class="text-center">Ya tienes una cuenta?
-                                        <a  th:href="@{/signIn}" >Inicia Sesion Aqui</a>
+                                        <a  th:href="@{/login}" >Inicia Sesion Aqui</a>
                                     </p>
                                 </form>
                             </div>

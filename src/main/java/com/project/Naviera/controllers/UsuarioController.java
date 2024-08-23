@@ -12,10 +12,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.project.Naviera.dao.UsuarioDao;
+import com.project.Naviera.models.Rol;
 import com.project.Naviera.models.Usuario;
 import com.project.Naviera.models.UsuarioDto;
 import com.project.Naviera.service.RolRepository;
+import com.project.Naviera.service.RolService;
 import com.project.Naviera.service.UsuarioRepository;
+import com.project.Naviera.service.UsuarioService;
+
 import jakarta.validation.Valid;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,15 +31,25 @@ import org.springframework.validation.BindingResult;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
+    @Autowired
+    private UsuarioService userService;
+
    @Autowired
    private UsuarioRepository repo;
    
    @Autowired
-   private RolRepository rolrepo;
-
+   private RolRepository rolRepo;
 
    @Autowired
-   private PasswordEncoder passwordEncoder;
+   private RolService rolService;
+
+   private final UsuarioDao usuarioDao;
+
+   @Autowired
+   public UsuarioController(UsuarioDao usuarioDao) {
+       this.usuarioDao = usuarioDao;
+   }
+
 
    @GetMapping({"","/"})
    public String listar(Model model){
@@ -43,107 +59,103 @@ public class UsuarioController {
    }  
    
    @GetMapping("/create")
-   public String create(Model model){
-       UsuarioDto usuarioDto = new UsuarioDto();
-       model.addAttribute("usuarioDto", usuarioDto);
-       return "usuarios/create";
-   }
+    public String showCreateForm(Model model) {
+        List<Rol> roles = rolService.getAllRoles();
+        model.addAttribute("usuarioDto", new UsuarioDto());
+        model.addAttribute("roles", roles);
+        return "usuarios/create";
+    }
 
-   @PostMapping("/create")
-   public String CreateUsuario(
-       @Valid @ModelAttribute UsuarioDto usuarioDto,
-       BindingResult result){
-
-
-       Usuario usuario = new Usuario();
-       String encodedPassword = passwordEncoder.encode(usuarioDto.getContraseña());
-
-
-       usuario.setPrimerNombre(usuarioDto.getPrimerNombre());
-       usuario.setApellido(usuarioDto.getApellido());
-       usuario.setUsername(usuarioDto.getUsername());
-       usuario.setContraseña(encodedPassword);
-       usuario.setEmail(usuarioDto.getEmail());
-       usuario.setRol(usuarioDto.getRol());
-       usuario.setNacionalidad(usuarioDto.getNacionalidad());
-       usuario.setRutaImagen(usuarioDto.getRutaImagen());
-
-       repo.save(usuario);
-
-       return "redirect:/usuarios";
-   }
-
-@GetMapping("/edit/{id}")
-public String showEditForm(@PathVariable("id") int id, Model model) {
-    // Obtén el usuario por ID
-    Usuario usuario = repo.findById(id).orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con ID: " + id));
-    
-    // Convierte el usuario a UsuarioDto
-    UsuarioDto usuarioDto = new UsuarioDto();
-    usuarioDto.setPrimerNombre(usuario.getPrimerNombre());
-    usuarioDto.setApellido(usuario.getApellido());
-    usuarioDto.setUsername(usuario.getUsername());
-    usuarioDto.setEmail(usuario.getEmail());
-    usuarioDto.setRol(usuario.getRol());
-    usuarioDto.setNacionalidad(usuario.getNacionalidad());
-    usuarioDto.setRutaImagen(usuario.getRutaImagen());
-    
-    // Agrega UsuarioDto al modelo
-    model.addAttribute("usuarioDto", usuarioDto);
-    model.addAttribute("roles", rolrepo.findAll());
-    model.addAttribute("id", id); // Agrega el ID al modelo para su uso en el formulario
-    
-    return "usuarios/edit"; // Retorna la vista para el formulario de edición
-}
-
-
+    @PostMapping("/create")
+    public String createUsuario(@ModelAttribute Usuario usuario) {
+        usuarioDao.createUsuarioAdmin(usuario);
+        return "redirect:/usuarios";
+    }
    
-@PostMapping("/edit/{id}")
-public String updateUsuario(
-        @PathVariable("id") int id,
-        @Valid @ModelAttribute UsuarioDto usuarioDto,
-        BindingResult result) {
-    
-    if (result.hasErrors()) {
-        return "usuarios/edit"; // Regresa al formulario si hay errores
+
+
+
+
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable("id") Long id, Model model) {
+        Usuario usuario = usuarioDao.findById(id); 
+        if (usuario != null) {
+            UsuarioDto usuarioDto = convertToDto(usuario); // Convert Usuario to UsuarioDto
+            
+            // Fetch the list of roles from the database
+            List<Rol> roles = rolService.getAllRoles(); 
+            
+            // Add data to the model
+            model.addAttribute("usuarioDto", usuarioDto); 
+            model.addAttribute("roles", roles);
+            
+            return "usuarios/edit"; // Return to the edit page
+        } else {
+            return "redirect:/usuarios"; // Redirect if user is not found
+        }
     }
     
-    // Obtén el usuario existente por ID
-    Usuario usuario = repo.findById(id).orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con ID: " + id));
-    
-    // Actualiza los campos del usuario
-    usuario.setPrimerNombre(usuarioDto.getPrimerNombre());
-    usuario.setApellido(usuarioDto.getApellido());
-    usuario.setUsername(usuarioDto.getUsername());
-    usuario.setEmail(usuarioDto.getEmail());
-    usuario.setRol(usuarioDto.getRol());
-    usuario.setNacionalidad(usuarioDto.getNacionalidad());
-    usuario.setRutaImagen(usuarioDto.getRutaImagen());
-    
-    if (usuarioDto.getContraseña() != null && !usuarioDto.getContraseña().isEmpty()) {
-        String encodedPassword = passwordEncoder.encode(usuarioDto.getContraseña());
-        usuario.setContraseña(encodedPassword);
+    // Method to convert Usuario to UsuarioDto
+    private UsuarioDto convertToDto(Usuario usuario) {
+        UsuarioDto dto = new UsuarioDto();
+        dto.setIdUsuario(usuario.getIdUsuario());
+        dto.setPrimerNombre(usuario.getPrimerNombre());
+        dto.setApellido(usuario.getApellido());
+        dto.setUsername(usuario.getUsername());
+        dto.setEmail(usuario.getEmail());
+        if (usuario.getRol() != null) {  // Check if Rol is not null
+            dto.setRolId(usuario.getRol().getIdrol());  // Safe to call getIdrol()
+        } else {
+            // Handle the case where Rol is null, e.g., set a default role ID or log a warning
+            dto.setRolId(null); // or a default ID like -1 or 0, depending on your use case
+        }// Assuming Rol is a separate entity and is properly set in Usuario
+        dto.setNacionalidad(usuario.getNacionalidad());
+        dto.setRutaImagen(usuario.getRutaImagen());
+        return dto;
     }
     
-    // Guarda el usuario actualizado
-    repo.save(usuario);
+
+
+
     
-    return "redirect:/usuarios"; // Redirige a la lista de usuarios
+
+
+    
+    @PostMapping("/edit/{id}")
+    public String updateUsuario(@PathVariable("id") Long id,
+                                @ModelAttribute("usuarioDto") @Valid UsuarioDto usuarioDto,
+                                BindingResult result,
+                                Model model) {
+        if (result.hasErrors()) {
+            // Reload roles in case of errors to repopulate the dropdown
+            model.addAttribute("roles", rolService.getAllRoles());
+            return "usuarios/edit";
+        }
+
+        // Convert UsuarioDto back to Usuario entity
+        Usuario usuario = usuarioDao.findById(id);
+        if (usuario != null) {
+            usuario.setPrimerNombre(usuarioDto.getPrimerNombre());
+            usuario.setApellido(usuarioDto.getApellido());
+            usuario.setUsername(usuarioDto.getUsername());
+            usuario.setEmail(usuarioDto.getEmail());
+            usuario.setNacionalidad(usuarioDto.getNacionalidad());
+            usuario.setRutaImagen(usuarioDto.getRutaImagen());
+            Rol selectedRole = rolService.findById(usuarioDto.getRolId()); // Fetch role from the database
+            usuario.setRol(selectedRole);
+
+            // Update the user
+            usuarioDao.Update(usuario);
+        }
+
+        return "redirect:/usuarios";
 }
 
 
-@GetMapping("/delete")
-public String deleteUsuario(@RequestParam int id){
+    @GetMapping("/delete")
+    public String deleteUsuario(@RequestParam Usuario usuario){
 
-       try {
-           Optional<Usuario> usuario = repo.findById(id);
-           if (usuario.isPresent()) {
-               repo.delete(usuario.get());
-           }
-           
-       } catch (Exception e) {
-           System.err.println("Exception: "+e.getMessage());
-       }
-       return "redirect:/usuarios";
-   }
+        usuarioDao.Delete(usuario);
+        return "redirect:/usuarios";
+    }
 }
