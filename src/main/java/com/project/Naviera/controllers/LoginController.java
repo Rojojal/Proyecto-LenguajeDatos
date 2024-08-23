@@ -2,7 +2,7 @@ package com.project.Naviera.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
+//a
 @Controller
 public class LoginController {
 

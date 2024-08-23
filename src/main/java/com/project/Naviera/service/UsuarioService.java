@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.Naviera.models.Rol;
 import com.project.Naviera.models.Usuario;
-
+//a
 @Service
 public class UsuarioService implements UserDetailsService {
 

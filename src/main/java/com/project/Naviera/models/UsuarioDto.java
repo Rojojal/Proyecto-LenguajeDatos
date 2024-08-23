@@ -1,7 +1,7 @@
 package com.project.Naviera.models;
 
 import jakarta.persistence.*;
-
+//a
 @Entity
 @Table(name = "FIDE_USUARIO_TB")
 public class UsuarioDto {
