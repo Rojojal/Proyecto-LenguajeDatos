@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Josue y Luis
  */
 
-public interface RegistroDao extends JpaRepository<Registro, Long>{
-    
-   
-}
+//public interface RegistroDao extends JpaRepository<Registro, Long>{
+//    
+//   
+//}

@@ -1,6 +1,5 @@
 package com.project.Naviera.service.impl;
 //se omitio commit
-import com.project.Naviera.service.firebaseService;
 
 import com.google.auth.Credentials;
 import com.google.auth.ServiceAccountSigner;
@@ -22,8 +21,9 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import com.project.Naviera.service.FirebaseStorageService;
 @Service
-public class firebaseServiceImpl implements firebaseService {
+public class FirebaseStorageServiceImpl implements FirebaseStorageService {
     @Override
     public String cargaImagen(MultipartFile archivoLocalCliente, String carpeta, Long id) {
         try {
