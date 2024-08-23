@@ -2,33 +2,79 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
-
-
     </head>
-    <link th:href="@{/css/accesoPersonalRefugio.css}" rel="stylesheet" type="text/css"/>
-    <title>Acceso personal del refugio</title>
-
+    <title>[[#{panel.titulo}]]</title>
     <body>
         <header th:replace="layout/plantilla :: header"></header>
 
-        <div id="b" class="fondo">
+       <body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 sidebar d-md-block bg-dark">
+                <div class="sidebar-sticky">
+                    <h4 class="text-white text-center mb-4">[[#{panel.titulo}]]</h4>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/usuario/listado">
+                                <i class="fas fa-users"></i> Usuarios
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/producto/listado">
+                                <i class="fas fa-box"></i> Productos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/contenedor/vistaContenedor">
+                                <i class="fas fa-boxes"></i> Contenedores
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/buque/listado">
+                                <i class="fas fa-ship"></i> Buques
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/categoria/vistaCategoria">
+                                <i class="fas fa-tags"></i> Categorías
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/inventario/listado">
+                                <i class="fas fa-warehouse"></i> Inventario
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-4 main-content">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
+                    <a class="navbar-brand" href="#">[[#{panel.titulo}]]</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">
+                                    <i class="fas fa-sign-out-alt"></i> [[#{panel.volver}]]
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
 
-
-
-            <div class="imagen-form-wrapper">
-
-                <section class="container mt-5">
-                    <h1 class="mb-4">[[#{panel.titulo}]]</h1>
-                    <h4 class="mb-4">[[#{panel.actividad}]]</h4>
-                    <form class="botonesPanel">
-                        <a th:href="@{/}" class="btn custom-btn-color">[[#{panel.primerTexto}]]</a>
-                        <a th:href="@{/}" class="btn custom-btn-color">[[#{panel.tercerTexto}]]</a>
-                        <a th:href="@{/}" class="btn custom-btn-color">[[#{panel.segundoTexto}]]</a>
-                    </form>
-                </section>
-            </div>
+  
+                <div class="container">
+                    <h1 class="mb-4">Bienvenido al Panel de Administración</h1>
+                    <p class="lead">Seleccione una opción del menú para gestionar los diferentes módulos.</p>
+                </div>
+            </main>
         </div>
+    </div>
         <footer th:replace="layout/plantilla :: footer"></footer>
-
     </body>
 </html>
