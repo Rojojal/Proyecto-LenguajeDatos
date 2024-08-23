@@ -1,13 +1,10 @@
 package com.project.Naviera.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 //a
 @Entity
 @Table(name = "FIDE_empleado_TB")
-public class Empleado {
+public class EmpleadoDto {
     @Id
     @Column(name = "id_empleado")
     private long idEmpleado;
@@ -44,7 +41,3 @@ public class Empleado {
 
 
 }
-/*
- id_empleado number(6,0),
-    nombre varchar2(60),
- */
