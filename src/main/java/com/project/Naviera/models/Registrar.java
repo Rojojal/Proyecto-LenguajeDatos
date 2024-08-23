@@ -1,6 +1,6 @@
 
 package com.project.Naviera.models;
-/* 
+
 import jakarta.persistence.*;
 
 
