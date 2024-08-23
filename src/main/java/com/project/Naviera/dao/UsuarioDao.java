@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.project.Naviera.models.Usuario;
-
+//a
 @Repository
 public class UsuarioDao {
 

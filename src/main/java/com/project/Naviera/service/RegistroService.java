@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.Naviera.models.Usuario;
 
 public interface RegistroService {
-
+//a
     public Model activar(Model model, String usuario, String clave);
 
     public Model crearUsuario(Model model, Usuario usuario) throws MessagingException;
