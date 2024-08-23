@@ -49,6 +49,12 @@ public class CategoriaController {
         return "redirect:/categoria/vistaCategoria";
     }
 
+    @PostMapping("/crear")
+    public String insertar(Categoria categoria) {
+        categoriaService.insertar(categoria);
+        return "redirect:/categoria/vistaCategoria";
+    }
+
     @GetMapping("/editar/{idCategoria}")
     public String editar(Model model, Categoria categoria) {
         categoria = categoriaService.getCategoria(categoria);

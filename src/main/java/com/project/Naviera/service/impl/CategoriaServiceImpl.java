@@ -43,11 +43,13 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     @Transactional
     public void save(Categoria categoria) {
-        if (categoria.getIdCategoria() == 0) { 
-            categoriaDao.categoria_insertar_SP(categoria.getNombreCategoria());
-        } else {
-            categoriaDao.categoria_actualizar_nombre_SP(categoria.getNombreCategoria(), categoria.getIdCategoria());
-        }
+        categoriaDao.save(categoria);
+    }
+
+    @Override
+    @Transactional
+    public void insertar(Categoria categoria) {
+        categoriaDao.categoria_insertar_SP(categoria.getNombreCategoria());
     }
 
     @Override
