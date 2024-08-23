@@ -54,9 +54,16 @@ public class AlmacenServiceImpl implements AlmacenService {
 
     @Override
     @Transactional
+    public void insertar(Almacen almacen) {
+
+        almacenDao.almacen_insertar_SP(almacen.getTipoAlmacen());
+    }
+
+    @Override
+    @Transactional
     public void delete(Almacen almacen) {
 
-        almacenDao.FIDE_almacen_TB_eliminar_SP(almacen.getIdAlmacen());
+        almacenDao.almacen_eliminar_SP(almacen.getIdAlmacen());
     }
 
 

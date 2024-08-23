@@ -19,6 +19,8 @@ public interface AlmacenService {
     public Almacen getAlmacen(Almacen almacen);
 
     public void save(Almacen almacen);
+
+    public void insertar(Almacen almacen);
     
     public void delete(Almacen almacen);
 }

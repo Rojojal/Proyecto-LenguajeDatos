@@ -19,9 +19,18 @@ import org.springframework.data.repository.query.Param;
 public interface AlmacenDao extends JpaRepository<Almacen, Long> {
 
 
-    @Procedure(name="FIDE_almacen_TB_eliminar_SP")
-    public void FIDE_almacen_TB_eliminar_SP(
+    @Procedure(name="almacen_insertar_SP", procedureName = "FIDE_PROCEDIMIENTOS_FUNCIONES_PKG.almacen_insertar_SP")
+    public void almacen_insertar_SP(
+            @Param("P_tipo_almacen") String tipoAlmacen);
+
+    @Procedure(name="almacen_eliminar_SP", procedureName = "FIDE_PROCEDIMIENTOS_FUNCIONES_PKG.almacen_eliminar_SP")
+    public void almacen_eliminar_SP(
             @Param("P_id_almacen") long PIdAlmacen);
+
+    @Procedure(name="almacen_actualizar_SP", procedureName = "FIDE_PROCEDIMIENTOS_FUNCIONES_PKG.almacen_actualizar_SP")
+    public void almacen_actualizar_SP(
+            @Param("P_id_almacen") long PIdAlmacen,
+            @Param("P_tipo_almacen") String tipoAlmacen);
     
     
 

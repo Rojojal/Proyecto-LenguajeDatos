@@ -49,6 +49,12 @@ public class AlmacenController {
         return "redirect:/almacen/vistaAlmacen";
     }
 
+    @PostMapping("/crear")
+    public String insertar(Almacen almacen) {
+        almacenService.insertar(almacen);
+        return "redirect:/almacen/vistaAlmacen";
+    }
+
     @GetMapping("/editar/{idAlmacen}")
     public String editar(Model model, Almacen almacen) {
         almacen = almacenService.getAlmacen(almacen);
