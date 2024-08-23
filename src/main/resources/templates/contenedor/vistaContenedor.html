@@ -28,21 +28,21 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th>1093 lbs</th>
-                <td>7932 lbs</td>
-                <td>Bueno</td>
-                <td>automovil</td>
-                <td>Santa lucia</td>
+            <tr th:each="contenedor: ${contenedores}">
+                <th>[[${contenedor.pesoNeto}]]</th>
+                <td>[[${contenedor.pesoMaximo}]]</td>
+                <td>[[${contenedor.estadoContenedor}]]</td>
+                <td>[[${contenedor.almacen.tipoAlmacen}]]</td>
+                <td>[[${contenedor.idBuque}]]</td>
                 <td>
                     <a th:href="@{/productoContenedor/ver}" class="btn btn-warning">
                         <i class="fas fa-pencil">[[#{contenedor.verProductos}]]</i>
                     </a>
-                    <a th:href="@{/contenedor/editar}" class="btn btn-primary">
+                    <a th:href="@{/contenedor/editar}+${contenedor.idContenedor}" class="btn btn-primary">
                         <i class="fas fa-pencil">[[#{contenedor.editar}]]</i>
                     </a>
 
-                    <a th:href="@{/contenedor/eliminar}" class="btn btn-danger">
+                    <a th:href="@{/contenedor/eliminar}+${contenedor.idContenedor}" class="btn btn-danger">
                         <i class="fas fa-trash">[[#{contenedor.eliminar}]]</i>
                     </a>
 

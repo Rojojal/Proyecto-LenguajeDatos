@@ -17,9 +17,34 @@ import org.springframework.data.repository.query.Param;
  * @author luis
  */
 public interface ContenedorDao extends JpaRepository<Contenedor, Long> {
-    @Procedure(name="FIDE_contenedor_TB_eliminar_SP")
-    public void FIDE_contenedor_TB_eliminar_SP(
-            @Param("P_id_contenedor") long PIdContenedor);
+    @Procedure(name="contenedor_insertar_SP", procedureName = "FIDE_PROCEDIMIENTOS_FUNCIONES_PKG.contenedor_insertar_SP")
+    public void contenedor_insertar_SP(
+            @Param("P_peso_neto") double PPesoNeto,
+            @Param("P_estado_Contenedor") String PEstadoContenedor,
+            @Param("P_peso_maximo") double PPesoMaximo,
+            @Param("P_valor_neto") double PValorNeto,
+            @Param("P_id_buque") long PIdBuque,
+            @Param("P_id_producto") long PIdProducto,
+            @Param("P_id_almacen") double PIdAlmacen
+            );
+
+    @Procedure(name="contenedor_eliminar_SP", procedureName = "FIDE_PROCEDIMIENTOS_FUNCIONES_PKG.contenedor_eliminar_SP")
+    public void contenedor_eliminar_SP(
+            @Param("P_id_contenedor") long PIdContenedor
+    );
+
+
+    @Procedure(name="contenedor_actualizar_SP", procedureName = "FIDE_PROCEDIMIENTOS_FUNCIONES_PKG.contenedor_actualizar_SP")
+    public void contenedor_actualizar_SP(
+            @Param("P_id_contenedor") long PIdContenedor,
+            @Param("P_peso_neto") double PPesoNeto,
+            @Param("P_estado_Contenedor") String PEstadoContenedor,
+            @Param("P_peso_maximo") double PPesoMaximo,
+            @Param("P_valor_neto") double PValorNeto,
+            @Param("P_id_buque") long PIdBuque,
+            @Param("P_id_producto") long PIdProducto,
+            @Param("P_id_almacen") double PIdAlmacen
+    );
     
 
 }

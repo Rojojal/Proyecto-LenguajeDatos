@@ -3,32 +3,46 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{layout/plantilla :: head}">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <header th:replace="~{layout/plantilla :: header}"/>
-    <div class="container py-3">
-        <h1 class="text-center">[[#{contenedor.editarContenedor}]]</h1>
-        <div class="container d-flex justify-content-center align-items-center ">
-
-            <form action="" method="POST" >
+<header th:replace="~{layout/plantilla :: header}"/>
+<div class="container py-4">
+    <div class="card">
+        <div class="card-header text-center">
+            <h3>[[#{contenedor.editarContenedor}]]</h3>
+        </div>
+        <div class="card-body">
+            <form
+                  method="POST"
+                  th:action="@{/contenedor/guardar}"
+                  th:object="${contenedor}">
+                <input type="hidden" name="idContenedor" th:field="*{idContenedor}"/>
 
                 <label for="pesoNeto">[[#{contenedor.pesoNeto}]]</label>
-                <input class="form-control" name="pesoNeto" id="pesoNeto" type="number" />
+                <input class="form-control" name="pesoNeto" th:field="*{pesoNeto}" id="pesoNeto" type="number" />
+
+                <label for="estadoContenedor">[[#{contenedor.estadoContenedor}]]</label>
+                <input class="form-control" name="estadoContenedor" th:field="*{estadoContenedor}" id="estadoContenedor" type="text" />
 
                 <label for="pesoMaximo">[[#{contenedor.pesoMaximo}]]</label>
-                <input class="form-control" name="pesoMaximo" id="pesoMaximo" type="number" />
+                <input class="form-control" name="pesoMaximo" th:field="*{pesoMaximo}" id="pesoMaximo" type="number" />
 
-                <label for="almacenID">[[#{contenedor.almacen}]]</label>
-                <input class="form-control" name="almacenID" id="almacenID" type="number" />
+                <label for="idAlmacen">[[#{contenedor.almacen}]]</label>
+                <input class="form-control" name="idAlmacen" th:field="*{idAlmacen}" id="idAlmacen" type="number" />
 
-                <label for="buqueID">[[#{contenedor.buque}]]</label>
-                <input class="form-control" name="buqueID" id="buqueID" type="number" />
+                <label for="idBuque">[[#{contenedor.buque}]]</label>
+                <input class="form-control" name="idBuque" th:field="*{idBuque}" id="idBuque" type="number" />
 
-               <button type="submit" class="btn btn-success">[[#{accion.actualizar}]]</button>
+                <label for="IdProducto">producto</label>
+                <input class="form-control" name="IdProducto" th:field="*{IdProducto}" id="IdProducto" type="number" />
+
+                <button type="submit" class="btn btn-success w-100">[[#{accion.actualizar}]]</button>
             </form>
         </div>
     </div>
-    <footer th:replace="~{layout/plantilla :: footer}"></footer>
+</div>
+<footer th:replace="~{layout/plantilla :: footer}"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

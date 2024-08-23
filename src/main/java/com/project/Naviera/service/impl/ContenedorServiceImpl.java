@@ -49,14 +49,40 @@ public class ContenedorServiceImpl implements ContenedorService {
     @Transactional
     public void save(Contenedor contenedor) {
 
-        contenedorDao.save(contenedor);
+        contenedorDao.contenedor_actualizar_SP(
+                contenedor.getIdContenedor(),
+                contenedor.getPesoNeto(),
+                contenedor.getEstadoContenedor(),
+                contenedor.getPesoMaximo(),
+                contenedor.getValorNeto(),
+                contenedor.getIdBuque(),
+                contenedor.getIdProducto(),
+                contenedor.getIdAlmacen()
+        );
     }
+
+    @Override
+    @Transactional
+    public void insertar(Contenedor contenedor) {
+
+        contenedorDao.contenedor_insertar_SP(
+                contenedor.getPesoNeto(),
+                contenedor.getEstadoContenedor(),
+                contenedor.getPesoMaximo(),
+                contenedor.getValorNeto(),
+                contenedor.getIdBuque(),
+                contenedor.getIdProducto(),
+                contenedor.getIdAlmacen()
+        );
+    }
+
+
 
     @Override
     @Transactional
     public void delete(Contenedor contenedor) {
 
-        contenedorDao.FIDE_contenedor_TB_eliminar_SP(contenedor.getIdContenedor());
+        contenedorDao.contenedor_eliminar_SP(contenedor.getIdContenedor());
     }
 
 

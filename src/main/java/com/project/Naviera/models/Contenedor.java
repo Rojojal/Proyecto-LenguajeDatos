@@ -24,11 +24,14 @@ public class Contenedor {
     @Column(name = "Estado")
     private String estado;
 
-//    @Column(name = "id_almacen")
-//    private double idAlmacen;
-//
+    @Column(name = "id_almacen")
+    private double idAlmacen;
+
     @Column(name = "id_buque")
-    private double idBuque;
+    private Long idBuque;
+
+    @Column(name = "id_producto")
+    private Long idProducto;
 
     public Long getIdContenedor() {
         return idContenedor;
@@ -78,26 +81,42 @@ public class Contenedor {
         this.estado = estado;
     }
 
-    public double getIdBuque() {
+    public double getIdAlmacen() {
+        return idAlmacen;
+    }
+
+    public void setIdAlmacen(double idAlmacen) {
+        this.idAlmacen = idAlmacen;
+    }
+
+//    public Almacen getAlmacen() {
+//        return almacen;
+//    }
+//
+//    public void setAlmacen(Almacen almacen) {
+//        this.almacen = almacen;
+//    }
+
+    public Long getIdBuque() {
         return idBuque;
     }
 
-    public void setIdBuque(double idBuque) {
+    public void setIdBuque(Long idBuque) {
         this.idBuque = idBuque;
     }
 
-    public Almacen getAlmacen() {
-        return almacen;
+    public Long getIdProducto() {
+        return idProducto;
     }
 
-    public void setAlmacen(Almacen almacen) {
-        this.almacen = almacen;
+    public void setIdProducto(Long idProducto) {
+        this.idProducto = idProducto;
     }
 
-    //Join contenedor con almacen
-    @OneToOne
-    @JoinColumn(name="id_almacen")
-    private Almacen almacen;
+//    //Join contenedor con almacen
+//    @OneToOne
+//    @JoinColumn(name="id_almacen")
+//    private Almacen almacen;
 
     //join buque con contenedor
 //    @ManyToOne

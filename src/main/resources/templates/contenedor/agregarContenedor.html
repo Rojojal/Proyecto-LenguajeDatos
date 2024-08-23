@@ -11,19 +11,27 @@
         <h1 class="text-center">[[#{contenedor.agregarContenedor}]]</h1>
         <div class="container d-flex justify-content-center align-items-center ">
 
-            <form action="" method="POST" >
+            <form th:action="@{/contenedor/crear}"
+                  th:object="${contenedor}"
+                  method="POST" >
 
                 <label for="pesoNeto">[[#{contenedor.pesoNeto}]]</label>
                 <input class="form-control" name="pesoNeto" id="pesoNeto" type="number" />
 
+                <label for="estadoContenedor">[[#{contenedor.estadoContenedor}]]</label>
+                <input class="form-control" name="estadoContenedor" id="estadoContenedor" type="text" />
+
                 <label for="pesoMaximo">[[#{contenedor.pesoMaximo}]]</label>
                 <input class="form-control" name="pesoMaximo" id="pesoMaximo" type="number" />
 
-                <label for="almacenID">[[#{contenedor.almacen}]]</label>
-                <input class="form-control" name="almacenID" id="almacenID" type="number" />
+                <label for="idAlmacen">[[#{contenedor.almacen}]]</label>
+                <input class="form-control" name="idAlmacen" id="idAlmacen" type="number" />
 
-                <label for="buqueID">[[#{contenedor.buque}]]</label>
-                <input class="form-control" name="buqueID" id="buqueID" type="number" />
+                <label for="idBuque">[[#{contenedor.buque}]]</label>
+                <input class="form-control" name="idBuque" id="idBuque" type="number" />
+
+                <label for="IdProducto">producto</label>
+                <input class="form-control" name="IdProducto" id="IdProducto" type="number" />
 
                <button type="submit" class="btn btn-success">[[#{accion.agregar}]]</button>
             </form>

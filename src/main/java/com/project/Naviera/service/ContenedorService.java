@@ -19,6 +19,8 @@ public interface ContenedorService {
     public Contenedor getContenedor(Contenedor contenedor);
 
     public void save(Contenedor contenedor);
+
+    public void insertar(Contenedor contenedor);
     
     public void delete(Contenedor contenedor);
 }
