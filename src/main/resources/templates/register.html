@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Registrarse</title>
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+        
+        <section th:fragment="nuevoUsuario" class="d-flex align-items-center justify-content-center bg-dark" style="min-height: 100vh; background-size: cover; background-image: url(https://media.graphassets.com/GmzTgpLoR7CLixAGT6fD);">
+            <div class="card shadow-lg" style="width: 22rem;">
+                <div class="card-body">
+                    <h4 class="card-title text-center"><i class="fas fa-user-plus"></i>[[#{registrar.registro}]]</h4>
+                    <p class="text-center text-muted">[[#{registrar.intro}]]</p>
+
+                    <form method="POST" th:action="@{/register}" th:object="${usuarioDto}" class="was-validated">
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" th:field="${usuarioDto.primerNombre}" placeholder="Nombre" required>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" th:field="${usuarioDto.apellido}" placeholder="Apellido" required>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+                            </div>
+                            <input type="text" class="form-control" th:field="${usuarioDto.username}" placeholder="Username" required>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            </div>
+                            <input type="password" class="form-control" th:field="${usuarioDto.contraseña}" placeholder="Password" required>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            </div>
+                            <input type="email" class="form-control" th:field="${usuarioDto.email}" placeholder="Email" required>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-flag"></i></span>
+                            </div>
+                            <input type="text" class="form-control" th:field="${usuarioDto.nacionalidad}" placeholder="Nationality" required>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-image"></i></span>
+                            </div>
+                            <input type="text" class="form-control" th:field="${usuarioDto.rutaImagen}" placeholder="URL de la Imagen" required>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt"></i>[[#{index.registrarse}]]</button>
+                        </div>
+                        
+                        <p class="text-center mt-3">[[#{register.cuenta}]]
+                            <a th:href="@{/login}"><i class="fas fa-sign-in-alt"></i> Inicia Sesión Aquí</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer th:replace="layout/plantilla :: footer"></footer>
+    </body>
+</html>

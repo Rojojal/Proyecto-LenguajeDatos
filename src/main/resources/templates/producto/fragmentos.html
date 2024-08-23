@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Patitas Felices</title>
+    </head>
+    <body>
+        <section th:fragment="panel">
+            <h1 style="text-align: center; margin-top: 30px;">Panel de productos</h1>
+            <p style="text-align: center">Seleccione un producto o agregue uno nuevo:</p>
+        </section>
+        <!-- 1 Sección para crear el botón de agregar... llamará a una ventana modal-->
+        <section th:fragment="botonesAgregar" class="py-4 mb-4">
+            <div class="container">
+                <div class="row">
+<!--                    <h1 style="text-align: center; margin-top: 30px;">Panel de administración</h1>
+                    <p style="text-align: center">Seleccione un perro o gato de la lista, o agregue una nueva mascota:</p>-->
+                    <div class="col-md-3"> 
+                        <button 
+                            type="button" 
+                            class="btn custom-btn-color" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarMascota">
+                            <i class="fas fa-plus"></i> [[#{mascota.agregar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2 Fragmento para agregar mascota, es la ventana modal -->
+        <section th:fragment="agregarProducto">
+            <div id="agregarMascota" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #dfccf3; color: white;">
+                            <h5 class="modal-title">[[#{mascota.agregar}]]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/mascota/guardar}" th:object="${mascota}"
+                              method="POST" class="was-validated" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="animal">[[#{mascota.animal}]]</label>
+                                    <input type="text" class="form-control" name="animal" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="activo">[[#{mascota.genero}]]</label>
+                                    <input type="text" class="form-control" name="genero" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="raza">[[#{mascota.raza}]]</label>
+                                    <input type="text" class="form-control" name="raza" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nombre">[[#{mascota.nombre}]]</label>
+                                    <input type="text" class="form-control" name="nombre" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="edad">[[#{mascota.edad}]]</label>
+                                    <input type="number" class="form-control" name="edad" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="descripcion">[[#{mascota.descripcion}]]</label>
+                                    <textarea class="form-control" name="descripcion" required="true"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="activo">[[#{mascota.activo}]]</label>
+                                    <input class="form-check-input" type="checkbox" name="activo" id="activo"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="imagen">[[#{mascota.rutaImagen}]]</label>
+                                    <input class="form-control" type="file" name="imagenFile" onchange="readURL(this);"/>
+                                    <img id="blah" src="#" alt="your image" height="200"/>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn custom-btn-color" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3 Sección principal para mostrar la información de la entidad mascota -->
+        <section th:fragment="listadoProducto" id="mascotas">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{mascota.listado}]]</h4>
+                            </div>
+                            <div th:if="${mascotas != null and !mascotas.empty}">
+                                <table class="table table-hover" style="background-color: #f5effb;">
+                                    <thead style="background-color: #461b75; color: white">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>[[#{mascota.animal}]]</th>
+                                            <th>[[#{mascota.genero}]]</th>
+                                            <th>[[#{mascota.raza}]]</th>
+                                            <th>[[#{mascota.nombre}]]</th>
+                                            <th>[[#{mascota.edad}]]</th>
+                                            <th>[[#{mascota.activo}]]</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="mascota, contador : ${mascotas}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${mascota.animal}]]</td>
+                                            <td>[[${mascota.genero}]]</td>
+                                            <td>[[${mascota.raza}]]</td>
+                                            <td>[[${mascota.nombre}]]</td>
+                                            <td>[[${mascota.edad}]]</td>
+                                            <td th:text="${mascota.activo} ? 'Activa' : 'Inactiva'"></td>
+                                            <td>
+                                                <a th:href="@{/mascota/eliminar/}+${mascota.idMascota}" class="btn custom-btn-color">
+                                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                                                </a>
+                                                <a th:href="@{/mascota/modificar/}+${mascota.idMascota}" class="btn custom-btn-color">
+                                                    <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${mascotas == null or mascotas.empty}">
+                                <span>[[#{lista.vacia}]]</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center" style="background-color: #dfccf3; color: #461b75;">
+                            <div class="card-body">
+                                <h3>[[#{mascota.total}]]</h3>
+                                <h4 class="fs-2"><i class="fa-solid fa-truck-fast"></i></i> [[${totalMascotas}]]</h4>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4 Fragmento que se utiliza en la página modifca.html -->
+        <section th:fragment="editarProducto">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form method="POST"
+                          th:action="@{/mascota/guardar}" 
+                          th:object="${mascota}"
+                          class="was-validated"                          
+                          enctype="multipart/form-data">
+                        <input type="hidden" name="idMascota" th:field="*{idMascota}"/>
+                        <input type="hidden" name="rutaImagen" th:field="*{rutaImagen}"/>
+                        <section th:replace="~{mascota/fragmentos :: botonesEditar}"/>
+                        <div id=details>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>[[#{accion.actualizar}]]</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <label for="animal">[[#{mascota.animal}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="animal" th:field="*{animal}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="genero">[[#{mascota.genero}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="genero" th:field="*{genero}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="raza">[[#{mascota.raza}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="raza" th:field="*{raza}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="nombre">[[#{mascota.nombre}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="nombre" th:field="*{nombre}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="edad">[[#{mascota.edad}]]</label>
+                                                    <input type="number" class="form-control" 
+                                                           name="edad" th:field="*{edad}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="descripcion">[[#{mascota.descripcion}]]</label>
+                                                    <textarea class="form-control" 
+                                                              name="descripcion" th:field="*{descripcion}"
+                                                              required="true"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="activo">[[#{mascota.activo}]]</label>
+                                                <input class="form-check-input" 
+                                                       type="checkbox" 
+                                                       name="activo" 
+                                                       id="activo"
+                                                       th:field="*{activo}">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="imagen">[[#{mascota.rutaImagen}]]</label>
+                                                <input class="form-control" type="file" name="imagenFile"
+                                                       onchange="readURL(this);" />
+                                                <img id="blah" th:src="@{${mascota.rutaImagen}}" alt="your image" height="200"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5 Fragmento que se utiliza en el fragmento anterior -->
+        <section th:fragment="botonesEditar">
+            <div class="container py-4 mb-4 bg-light">
+                <div class="row">
+                    <div class="col-md-4 d-grid">
+                        <a th:href="@{/mascota/listado}" class="btn custom-btn-color">
+                            <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">                                
+                        <a th:href="@{/mascota/eliminar/}+${mascota.idMascota}"
+                           class="btn custom-btn-color">
+                            <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">
+                        <button type="submit" class="btn custom-btn-color">
+                            <i class="fas fa-check"></i> [[#{accion.guardar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+    </body>
+</html>

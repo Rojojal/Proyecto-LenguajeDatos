@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+        <div class="container py-3">
+            <h1 class="text-center">[[#{categoria.titulo}]]</h1>
+
+            <div class="mb-3 text-center">
+            <a th:href="@{/categoria/agregar}" class="btn btn-success btn-custom me-2">
+                <i class="fas fa-plus"></i> [[#{accion.agregar}]]
+            </a>
+
+            <a th:href="@{/categoria/mostrarTodos}" class="btn btn-success btn-custom me-2">
+                <i class="fas fa-list"></i> [[#{accion.mostrarTodos}]]
+            </a>
+
+            <a th:href="@{/AccesoAdmin}" class="btn btn-danger btn-custom">
+                <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+            </a>
+            </div>
+
+           <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>[[#{categoria.nombreCategoria}]]</th>
+                        <th>[[#{categoria.estado}]]</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="categoria: ${categorias}">
+                        <td>[[${categoria.nombreCategoria}]]</td>
+                        <td>[[${categoria.estado}]]</td>
+                        <td class="text-center">
+                            <a th:href="@{/categoria/editar/}+${categoria.idCategoria}" class="btn btn-primary btn-custom">
+                                <i class="fas fa-pencil-alt"></i> [[#{accion.actualizar}]]
+                            </a>
+
+                            <a th:href="@{/categoria/eliminar/}+${categoria.idCategoria}" class="btn btn-danger btn-custom">
+                                <i class="fas fa-trash-alt"></i> [[#{accion.eliminar}]]
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+        <footer th:replace="~{layout/plantilla :: footer}"></footer>
+    </body>
+</html>

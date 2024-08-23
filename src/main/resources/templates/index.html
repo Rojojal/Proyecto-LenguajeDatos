@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    
+</head>
+<body><!---->
+    <header th:replace="~{layout/plantilla :: header}"/>
+
+    <div class="contenedorPrincipal">
+        <section class="sec1index">
+            <h1>[[#{index.tituloPrimeraImagen}]]</h1>
+            <p>[[#{index.textoPrimerImagen}]]</p>
+            <a href="/login" class="btn custom-btn-color">[[#{index.btnPrimerImagen}]]</a>
+        </section>
+        <section class="sec2index">
+            <img src="https://media.graphassets.com/G0KIjrtVS1mS7m0pyjTk" alt="Perro index" style="height: 500px"/>
+        </section>
+    </div>
+
+    <div class="contenedorPrincipal2">
+        <section>
+            <br />
+            <br />
+            <p>[[#{index.contenedor2}]]</p>
+            <p>[[#{index.contenedorTexto2}]]</p>
+        </section>
+    </div>
+
+    <div class="contenedorPrincipal2">
+        <section class="sec1index">
+            <img class="rounded-corner" src="https://i.blogs.es/b85429/density_map/840_560.jpg" alt="Mapa" style="height: 300px"/>
+        </section>
+        <section class="sec1index">
+            <img class="rounded-corner" src="https://landing.klog.co/hubfs/pexels-tom-fisk-2226458.jpg" alt="Puerto" style="height: 300px"/>
+        </section>
+        <section class="sec1index">
+            <img class="rounded-corner" src="https://elmercantil.com/wp-content/uploads/2023/05/MSC-scaled-e1684490390610.jpg" alt="Barco" style="height: 300px"/>
+        </section>
+    </div>
+
+    <!--
+    <div class="text-center mb-3">
+        <p style="font-family: sans-serif; color: black; font-size: 28px">[[#{index.noEncontrar}]]</p>
+    </div>
+
+    <div class="input-group rounded mx-auto mb-4" style="max-width: 400px;">
+        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon"/>
+        <span class="input-group-text border-0" id="search-addon">
+                <i class="fas fa-search"></i>
+            </span>
+    </div>  
+    -->
+
+    <br />
+    <br />
+
+    <div class="contenedorPrincipal" style="display: flex;">
+        <section class="sec2index" style="flex: 1; background-color: #f5effb; display: flex; justify-content: center; align-items: center; padding: 50px;">
+            <img class="rounded-corner" src="https://www.shutterstock.com/image-photo/aerial-front-view-medium-sized-600nw-2193275733.jpg" alt="perro" style="height: 400px;"/>
+        </section>
+        <section class="sec2index" style="flex: 1;">
+            <p style="font-family: serif; font-size: 26px">[[#{index.slogan}]]<p>
+        </section>
+    </div>
+    <footer th:replace="layout/plantilla :: footer"></footer>
+</body>
+</html>

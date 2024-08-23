@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+
+</head>
+<body>
+    <header th:replace="~{layout/plantilla :: header}"/>
+    <div class="container py-3">
+        <h1 class="text-center">[[#{detalle.titulo}]]</h1>
+
+        <div class="container py-2">
+            <a th:href="@{/detalle/agregar}" class="btn btn-success">
+                <i class="fas fa-plus">[[#{accion.agregar}]]</i>
+            </a>
+
+            <a th:href="@{/detalle/mostrarTodos}" class="btn btn-success">
+                <i class="fas fa-plus">[[#{accion.mostrarTodos}]]</i>
+            </a>
+        </div>
+
+        <table class="table table-dark table-striped">
+            <thead>
+            <tr>
+                <th>[[#{detalle.color}]]</th>
+                <th>[[#{detalle.tamaño}]]</th>
+                <th>[[#{detalle.estado}]]</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="detalle: ${detalles}">
+                <th>[[${detalle.color}]]</th>
+                <th>[[${detalle.tamaño}]]</th>
+                <th>[[${detalle.estado}]]</th>
+                <td>
+                    <a th:href="@{/detalle/editar/}+${detalle.idDetalle}" class="btn btn-primary">
+                        <i class="fas fa-pencil">[[#{accion.actualizar}]]</i>
+                    </a>
+
+                    <a th:href="@{/detalle/eliminar/}+${detalle.idDetalle}" class="btn btn-danger">
+                        <i class="fas fa-trash">[[#{accion.eliminar}]]</i>
+                    </a>
+
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+    <footer th:replace="~{layout/plantilla :: footer}"></footer>
+</body>
+</html>

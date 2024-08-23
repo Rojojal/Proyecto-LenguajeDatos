@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+
+</head>
+<body>
+    <header th:replace="~{layout/plantilla :: header}"/>
+    <div class="container py-3">
+        <h1 class="text-center"> [[#{contenedorProducto.titulo}]]</h1>
+
+        <div class="container py-2">
+            <a th:href="@{/productoContenedor/agregar}" class="btn btn-success">
+                <i class="fas fa-plus">[[#{contenedorProducto.agregar}]]</i>
+            </a>
+        </div>
+
+        <table class="table table-dark table-striped">
+            <thead>
+            <tr>
+                <th>[[#{contenedorProducto.productos}]]</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>tomates cherry</th>
+                <td>
+                    <a th:href="@{/productoContenedor/editar}" class="btn btn-success">
+                        <i class="fas fa-pencil">[[#{contenedorProducto.editar}]]</i>
+                    </a>
+
+                    <a th:href="@{/productoContenedor/eliminar}" class="btn btn-danger">
+                        <i class="fas fa-trash">[[#{contenedorProducto.eliminar}]]</i>
+                    </a>
+
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+    <footer th:replace="~{layout/plantilla :: footer}"></footer>
+</body>
+</html>
