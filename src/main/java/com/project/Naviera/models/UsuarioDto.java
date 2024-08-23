@@ -29,6 +29,24 @@ public class UsuarioDto {
 
     private Long  idrol;
 
+    private String estado;
+
+    public Long getIdrol() {
+        return this.idrol;
+    }
+
+    public void setIdrol(Long idrol) {
+        this.idrol = idrol;
+    }
+
+    public String getEstado() {
+        return this.estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     // Getters and Setters
     public Long getIdUsuario() {
         return idUsuario;

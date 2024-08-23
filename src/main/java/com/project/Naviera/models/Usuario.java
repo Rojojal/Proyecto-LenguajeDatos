@@ -36,6 +36,25 @@ public class Usuario {
     @JoinColumn(name = "id_rol")
     private Rol idrol;
 
+
+    private String estado;
+
+    public Rol getIdrol() {
+        return this.idrol;
+    }
+
+    public void setIdrol(Rol idrol) {
+        this.idrol = idrol;
+    }
+
+    public String getEstado() {
+        return this.estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     // Getters and Setters
     public Long getIdUsuario() {
         return idUsuario;

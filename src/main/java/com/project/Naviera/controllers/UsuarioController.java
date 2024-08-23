@@ -67,10 +67,38 @@ public class UsuarioController {
     }
 
     @PostMapping("/create")
-    public String createUsuario(@ModelAttribute Usuario usuario) {
-        usuarioDao.createUsuarioAdmin(usuario);
-        return "redirect:/usuarios";
+public String createUsuario(@ModelAttribute UsuarioDto usuarioDto, Model model) {
+  
+    if (usuarioDto.getContraseña() == null || usuarioDto.getContraseña().isEmpty()) {
+        model.addAttribute("error", "Password cannot be empty");
+        List<Rol> roles = rolService.getAllRoles();
+        model.addAttribute("roles", roles);
+        return "usuarios/create";
     }
+
+    
+    Rol rol = rolRepo.findById(usuarioDto.getRolId())
+                      .orElseThrow(() -> new IllegalArgumentException("Rol not found"));
+
+    Usuario usuario = new Usuario();
+    usuario.setContraseña(usuarioDto.getContraseña());
+    usuario.setRol(rol);
+    usuario.setPrimerNombre(usuarioDto.getPrimerNombre());
+    usuario.setApellido(usuarioDto.getApellido());
+    usuario.setUsername(usuarioDto.getUsername());
+    usuario.setEmail(usuarioDto.getEmail());
+    usuario.setNacionalidad(usuarioDto.getNacionalidad());
+    usuario.setRutaImagen(usuarioDto.getRutaImagen());
+
+    
+    usuarioDao.createUsuarioAdmin(usuario);
+    
+    return "redirect:/"; 
+}
+
+
+
+    
    
 
 
@@ -152,10 +180,15 @@ public class UsuarioController {
 }
 
 
-    @GetMapping("/delete")
-    public String deleteUsuario(@RequestParam Usuario usuario){
-
-        usuarioDao.Delete(usuario);
-        return "redirect:/usuarios";
+@GetMapping("/delete")
+public String deleteUsuario(@RequestParam("id") int id) {
+    System.out.println("Deleting user with ID: " + id);
+    try {
+        usuarioDao.Delete(id);
+    } catch (Exception e) {
+        e.printStackTrace();  // Log the exception if any
     }
+    return "redirect:/usuarios";
+}
+
 }
