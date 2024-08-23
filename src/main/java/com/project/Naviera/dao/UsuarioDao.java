@@ -20,14 +20,36 @@ public class UsuarioDao {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // Example method using jdbcTemplate
     public void createUsuarioAdmin(Usuario usuario) {
+        // Check if Rol is null
+        if (usuario.getRol() == null) {
+            // Log the error or handle it as needed
+            throw new IllegalArgumentException("Rol cannot be null");
+        }
+    
+        // Encode the password
         String encodedPassword = passwordEncoder.encode(usuario.getContraseña());
-        jdbcTemplate.update("CALL usuario_insertar_SP(?, ?, ?, ?, ?, ?, ?, ?)", usuario.getPrimerNombre(), usuario.getApellido(), usuario.getUsername(), encodedPassword, usuario.getEmail(), usuario.getRol(), usuario.getNacionalidad(), usuario.getRutaImagen());
+    
+        // Retrieve the role ID
+        Long rolId = usuario.getRol().getIdrol();
+    
+        // Perform the database operation
+        jdbcTemplate.update("CALL usuario_insertar_SP(?, ?, ?, ?, ?, ?, ?, ?)",
+            usuario.getPrimerNombre(),
+            usuario.getApellido(),
+            usuario.getUsername(),
+            encodedPassword,
+            usuario.getEmail(),
+            rolId,
+            usuario.getNacionalidad(),
+            usuario.getRutaImagen());
     }
+    
+    
 
     public void register(Usuario usuario) {
-        jdbcTemplate.update("CALL usuario_insertar_SP(?, ?, ?, ?, ?, ?, ?, ?)", usuario.getPrimerNombre(), usuario.getApellido(), usuario.getUsername(), usuario.getContraseña(), usuario.getEmail(), 2, usuario.getNacionalidad(), usuario.getRutaImagen());
+        String encodedPassword = passwordEncoder.encode(usuario.getContraseña());
+        jdbcTemplate.update("CALL usuario_insertar_SP(?, ?, ?, ?, ?, ?, ?, ?)", usuario.getPrimerNombre(), usuario.getApellido(), usuario.getUsername(), encodedPassword, usuario.getEmail(), 2, usuario.getNacionalidad(), usuario.getRutaImagen());
     }
 
     public void Update(Usuario usuario) {
@@ -53,9 +75,15 @@ public class UsuarioDao {
     );
 }
 
-    public void Delete(Usuario usuario) {
-        jdbcTemplate.update("CALL usuario_eliminar_SP(?)", usuario.getIdUsuario());
+public void Delete(int idUsuario) {
+    try {
+        jdbcTemplate.update("CALL usuario_eliminar_SP(?)", idUsuario);
+        System.out.println("User with ID " + idUsuario + " deleted.");
+    } catch (Exception e) {
+        e.printStackTrace();  // Log any exceptions that occur
     }
+}
+
     
     
 }
