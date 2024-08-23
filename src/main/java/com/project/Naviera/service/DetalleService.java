@@ -12,13 +12,17 @@ import java.util.List;
  *
  * @author Extreme
  */
-
 public interface DetalleService {
-     public List<Detalle> getDetalles(boolean activo);
-    
+
+    public List<Detalle> getDetalles(boolean activo);
+
+    Detalle getDetalle(Long idDetalle);
+
     public Detalle getDetalle(Detalle detalle);
 
     public void save(Detalle detalle);
-    
+
     public void delete(Detalle detalle);
+
+    public void activar(Detalle detalle);
 }

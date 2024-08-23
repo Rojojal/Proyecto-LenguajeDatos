@@ -20,48 +20,39 @@ import java.util.List;
 @Service
 public class CategoriaServiceImpl implements CategoriaService {
 
+   
     @Autowired
     private CategoriaDao categoriaDao;
-
-
 
     @Override
     @Transactional(readOnly = true)
     public List<Categoria> getCategorias(boolean activo) {
         var lista = categoriaDao.findAll();
-        if(activo){
-            lista.removeIf(
-                    c -> !c.getEstado().equals("Activo")
-            );
-
+        if (activo) {
+            lista.removeIf(c -> !c.getEstado().equals("Activo"));
         }
-
         return lista;
     }
 
     @Override
     @Transactional(readOnly = true)
     public Categoria getCategoria(Categoria categoria) {
-        return categoriaDao.getReferenceById(categoria.getIdCategoria());
+        return categoriaDao.findById(categoria.getIdCategoria()).orElse(null);
     }
 
     @Override
     @Transactional
     public void save(Categoria categoria) {
-
-        categoriaDao.categoria_insertar_SP(categoria.getNombreCategoria());
+        if (categoria.getIdCategoria() == 0) { 
+            categoriaDao.categoria_insertar_SP(categoria.getNombreCategoria());
+        } else {
+            categoriaDao.categoria_actualizar_nombre_SP(categoria.getNombreCategoria(), categoria.getIdCategoria());
+        }
     }
 
     @Override
     @Transactional
     public void delete(Categoria categoria) {
-
-        categoria.setEstado("inactivo");
-        categoria.setNombreCategoria(categoria.getNombreCategoria());
-        categoriaDao.save(categoria);
+        categoriaDao.categoria_eliminar_SP(categoria.getIdCategoria());
     }
-
-
-
-
 }

@@ -23,13 +23,11 @@ public class DetalleServiceImpl implements DetalleService {
     @Autowired
     private DetalleDao detalleDao;
 
-
-
     @Override
     @Transactional(readOnly = true)
     public List<Detalle> getDetalles(boolean activo) {
         var lista = detalleDao.findAll();
-        if(activo){
+        if (activo) {
             lista.removeIf(
                     c -> !c.getEstado().equals("Activo")
             );
@@ -37,6 +35,12 @@ public class DetalleServiceImpl implements DetalleService {
         }
 
         return lista;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Detalle getDetalle(Long idDetalle) {
+        return detalleDao.findById(idDetalle).orElse(null);
     }
 
     @Override
@@ -59,7 +63,10 @@ public class DetalleServiceImpl implements DetalleService {
         detalleDao.detalle_eliminar_SP(detalle.getIdDetalle());
     }
 
-
-
+    @Override
+    @Transactional
+    public void activar(Detalle detalle) {
+        detalleDao.detalle_activar_SP(detalle.getIdDetalle());
+    }
 
 }
