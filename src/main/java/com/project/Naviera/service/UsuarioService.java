@@ -1,6 +1,6 @@
 package com.project.Naviera.service;
 
-import com.project.Naviera.service.UsuarioRepository;
+import static com.google.cloud.Identity.user;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import com.project.Naviera.models.Rol;
 import com.project.Naviera.models.Usuario;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 //a
+
 @Service
 public class UsuarioService implements UserDetailsService {
 
@@ -25,7 +27,7 @@ public class UsuarioService implements UserDetailsService {
     private RolRepository Rolrepo;
 
     public List<Rol> getAllRoles() {
-     return Rolrepo.findAll();
+        return Rolrepo.findAll();
     }
 
     @Override
@@ -34,15 +36,17 @@ public class UsuarioService implements UserDetailsService {
         if (usuario == null) {
             throw new UsernameNotFoundException("User not found with email: " + email);
         }
-        return new org.springframework.security.core.userdetails.User(usuario.getEmail(), usuario.getContraseña(), new ArrayList<>());
+        var roles = new ArrayList<GrantedAuthority>();
+         roles.add(new SimpleGrantedAuthority(usuario.getIdrol().getNombreRol()));
+   
+
+        return new org.springframework.security.core.userdetails.User(usuario.getEmail(), usuario.getContraseña(),roles);
     }
     @Autowired
     private UsuarioRepository usuarioRepository;
-    
+
     public Usuario findByEmail(String email) {
         return usuarioRepository.findByEmail(email);
     }
 
-    
-   
 }

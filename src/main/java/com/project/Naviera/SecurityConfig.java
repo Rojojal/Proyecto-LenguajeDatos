@@ -70,7 +70,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                         "Los permisos q tiene el admin y el personal"
                 ).hasAnyRole("ADMIN", "PERSONAL")
                 .requestMatchers("Los permisos de usuarios")
-                .hasRole("USER")
+                .hasRole("user")
                 )
                 .formLogin((form) -> form
                 .loginPage("/login").permitAll())
