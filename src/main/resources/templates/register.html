@@ -5,186 +5,78 @@
     <head th:replace="~{layout/plantilla :: head}">
         <title>Registrarse</title>
     </head>
-    <body><!---->
+    <body>
         <header th:replace="~{layout/plantilla :: header}"/>
-        <!-- 1 Fragmento que se utiliza en la página para regresar -->
+        
+        <section th:fragment="nuevoUsuario" class="d-flex align-items-center justify-content-center bg-dark" style="min-height: 100vh; background-size: cover; background-image: url(https://media.graphassets.com/GmzTgpLoR7CLixAGT6fD);">
+            <div class="card shadow-lg" style="width: 22rem;">
+                <div class="card-body">
+                    <h4 class="card-title text-center"><i class="fas fa-user-plus"></i>[[#{registrar.registro}]]</h4>
+                    <p class="text-center text-muted">[[#{registrar.intro}]]</p>
 
-        <section th:fragment="nuevoUsuario" class="pt-5 pb-5 mt-0 align-items-center d-flex bg-dark" style="min-height: 100vh; background-size: cover; background-image: url(https://media.graphassets.com/GmzTgpLoR7CLixAGT6fD);">
-            <div class="container-fluid">
-                <div class="row  justify-content-center align-items-center d-flex-row text-center h-100">
+                    <form method="POST" th:action="@{/register}" th:object="${usuarioDto}" class="was-validated">
 
-                    <div class="col-12 col-md-4 col-lg-3   h-50 ">
-                        <div class="card shadow">
-                            <div class="card-body mx-auto">
-                                <h4 class="card-title mt-3 text-center">Registro</h4>
-                                <p class="text-center">Por favor, ingrese los datos para continuar con el registro</p>
-
-                                <form method="POST" th:action="@{/register}" th:object="${usuarioDto}" class="was-validated">
-
-                                    <div class="row mb-3">
-                                        <label class="col-sm-4 col-form-label">Nombre</label>
-                                        <input type="text" class="form-control" th:field="${usuarioDto.primerNombre}">
-                                        <p th:if="${#fields.hasErrors('primerNombre')}" th:errorclass="text-danger" th:errors="${usuarioDto.primerNombre}"></p>
-                                    </div>
-                            
-                                    <div class="row mb-3">
-                                        <label class="col-sm-4 col-form-label">Apellido</label>
-                                        <input type="text" class="form-control" th:field="${usuarioDto.apellido}">
-                                        <p th:if="${#fields.hasErrors('apellido')}" th:errorclass="text-danger" th:errors="${usuarioDto.apellido}"></p>
-                                    </div>
-                            
-                                    <div class="row mb-3">
-                                        <label class="col-sm-4 col-form-label">Username</label>
-                                        <input type="text" class="form-control" th:field="${usuarioDto.username}">
-                                        <p th:if="${#fields.hasErrors('username')}" th:errorclass="text-danger" th:errors="${usuarioDto.username}"></p>
-                                    </div>
-                            
-                                    <div class="row mb-3">
-                                        <label class="col-sm-4 col-form-label">Password</label>
-                                        <input type="password" class="form-control" th:field="${usuarioDto.contraseña}">
-                                        <p th:if="${#fields.hasErrors('contraseña')}" th:errorclass="text-danger" th:errors="${usuarioDto.contraseña}"></p>
-                                    </div>
-                            
-                                    <div class="row mb-3">
-                                        <label class="col-sm-4 col-form-label">Email</label>
-                                        <input type="email" class="form-control" th:field="${usuarioDto.email}">
-                                        <p th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="${usuarioDto.email}"></p>
-                                    </div>        
-                                    
-                                    <div class="row mb-3">
-                                        <label class="col-sm-4 col-form-label">Nacionalidad</label>
-                                        <input type="text" class="form-control" th:field="${usuarioDto.nacionalidad}">
-                                        <p th:if="${#fields.hasErrors('nacionalidad')}" th:errorclass="text-danger" th:errors="${usuarioDto.nacionalidad}"></p>
-                                    </div>
-                            
-                                    <div class="row mb-3">
-                                        <label class="col-sm-4 col-form-label">Imagen</label>
-                                        <input type="text" class="form-control" th:field="${usuarioDto.rutaImagen}">
-                                        <p th:if="${#fields.hasErrors('rutaImagen')}" th:errorclass="text-danger" th:errors="${usuarioDto.rutaImagen}"></p>
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-block mt-3">Sign Up</button>
-                                    </div>
-                                    <p class="text-center">Ya tienes una cuenta?
-                                        <a  th:href="@{/login}" >Inicia Sesion Aqui</a>
-                                    </p>
-                                </form>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
+                            <input type="text" class="form-control" th:field="${usuarioDto.primerNombre}" placeholder="Nombre" required>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- 2 Fragmento que se utiliza activar un usuario -->
-        <!-- 
-        <section th:fragment="activarUsuario" class="pt-5 pb-5 mt-0 align-items-center d-flex bg-dark" style="min-height: 100vh; background-size: cover; background-image: url(https://wallpapers.com/images/hd/modern-real-estate-buildings-aav0chf7p2uhgxsl.jpg);" >
 
-            <div class="container-fluid">
-                <div class="row  justify-content-center align-items-center d-flex-row text-center h-100">
-                    <div class="col-12 col-md-4 col-lg-3   h-50 ">
-                        <div class="card shadow">
-                            <div class="card-body mx-auto">
-                                <h4 class="card-title mt-3 text-center">Activacion</h4>
-                                <p class="text-center">Por favor, ingrese los datos completos para activar la cuenta</p>
-                                <form method="POST" th:action="@{/signUp/activate}" th:object="${user}" class="was-validated" enctype="multipart/form-data">
-                                    <input type="hidden" name="idUser" />
-                                    <div class="form-group mb-2">
-                                        <label>Nombre</label>
-                                        <input name="name" class="form-control" placeholder="Nombre" type="text"/>
-                                    </div>
-
-                                    <div class="form-group  mb-2">
-                                        <label>Primer Apellido</label>
-                                        <input name="first_sur_name" class="form-control" placeholder="Primer Apellido" type="text"  required="true"/>
-                                    </div>
-
-                                    <div class="form-group mb-2">
-                                        <label>Segundo Apellido</label>
-                                        <input name="second_sur_name" class="form-control" placeholder="Segundo Apellido"  type="text"  required="true"/>
-                                    </div>
-                                     <div class="form-group mb-2">
-                                        <label>Email</label>
-                                        <input name="email" class="form-control" placeholder="Email"   type="email"  required="true"/>
-                                    </div>
-                                    <div class="form-group  mb-2">
-                                        <label>Identificacion</label>
-                                        <input name="identification" class="form-control" placeholder="Identificacion nacional" type="number"    required="true"/>
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <label>Telefono</label>
-                                        <input name="phone" class="form-control" placeholder="Telefono" type="number"   required="true" />
-                                    </div>
-                                    <div class="form-group  mb-2">
-                                        <label>Fecha de cumpleaños</label>
-                                        <input name="birthDate" class="form-control"  type="date"  required="true" />
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <label>Contraseña</label>
-                                        <input name="password" class="form-control"  type="password"   required="true"/>
-                                    </div>
-
-                                    <div class="form-group  mb-2">
-                                        <label for="image">Subir imagen</label>
-                                        <input class="form-control" type="file" name="imageFile" onchange="readURL(this);" />
-                                        <!-- comment <img id="blah" th:src="@{${usuario.rutaImagen}}" alt="your image" height="200"/>-->
-                                    <!-- 
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-block mt-3">Activate Acount</button>
-                                    </div>
-                                    <p class="text-center">Ya tienes una cuenta?
-                                        <a  th:href="@{/signIn}" >Inicia Sesion Aqui</a>
-                                    </p>
-                                </form>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
+                            <input type="text" class="form-control" th:field="${usuarioDto.apellido}" placeholder="Apellido" required>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- 3 Fragmento que se utiliza recordar un usuario -->
-        <!-- 
-        <section th:fragment="recordarUsuario">
-            <div class="row py-2 justify-content-center">
-                <div class="col-md-3">
-                    <section>
-                        <div class="col-md-4 d-grid">
-                            <a th:href="@{/login}" class="btn btn-primary">
-                                <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
-                            </a>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+                            </div>
+                            <input type="text" class="form-control" th:field="${usuarioDto.username}" placeholder="Username" required>
                         </div>
-                    </section>
-                </div>
-            </div>
-            <div class="row py-2 justify-content-center">
-                <div class="col-md-3">
-                    <form method="POST"
-                          th:action="@{/registro/recordarUsuario}" th:object="${usuario}"
-                          class="was-validated">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>[[#{registro.recordar.us}]]</h4>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
                             </div>
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <label for="username">[[#{usuario.username}]]</label>
-                                    <input type="text" class="form-control" name="username" th:field="*{username}"/></div>                                                
-                                <div class="mb-3">
-                                    <label for="email">[[#{usuario.correo}]]</label>
-                                    <input type="email" class="form-control" name="correo" th:field="*{correo}"/></div>
-                            </div>
-                            <div class="card-footer text-end">                                                
-                                <button type="submit" class="btn btn-success">
-                                    <i class="fas fa-address-card"></i> [[#{registro.recordar.us}]]
-                                </button>
-                            </div>
+                            <input type="password" class="form-control" th:field="${usuarioDto.contraseña}" placeholder="Password" required>
                         </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            </div>
+                            <input type="email" class="form-control" th:field="${usuarioDto.email}" placeholder="Email" required>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-flag"></i></span>
+                            </div>
+                            <input type="text" class="form-control" th:field="${usuarioDto.nacionalidad}" placeholder="Nationality" required>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-image"></i></span>
+                            </div>
+                            <input type="text" class="form-control" th:field="${usuarioDto.rutaImagen}" placeholder="URL de la Imagen" required>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt"></i>[[#{index.registrarse}]]</button>
+                        </div>
+                        
+                        <p class="text-center mt-3">[[#{register.cuenta}]]
+                            <a th:href="@{/login}"><i class="fas fa-sign-in-alt"></i> Inicia Sesión Aquí</a>
+                        </p>
                     </form>
                 </div>
             </div>
         </section>
-            -->
-            <footer th:replace="layout/plantilla :: footer"></footer>
+
+        <footer th:replace="layout/plantilla :: footer"></footer>
     </body>
 </html>
